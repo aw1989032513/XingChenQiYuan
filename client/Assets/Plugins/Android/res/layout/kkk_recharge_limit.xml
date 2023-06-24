@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/kkk_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/kkk_rl_switch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/kkk_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="充值限额"
+                android:textColor="#858585"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/kkk_ib_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@color/kkk_transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/kkk_voice_on" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#CCCCCC"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/kkk_rl_money"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/kkk_textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="每日限额"
+                android:textColor="#858585"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/kkk_sp_money"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="当前额度"
+                android:textColor="#858585"
+                android:textSize="14sp" />
+            <!--  <Spinner
+                android:id="@+id/kkk_sp_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/kkk_transparent"
+                android:gravity="right|center_vertical"
+                android:textColor="#CCCCCC"
+                android:textSize="16sp" />-->
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#CCCCCC" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/kkk_ll_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="3K游戏不提倡过度参与游戏\n您可通过此设置进行消费限额"
+            android:textColor="#858585"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/kkk_btn_post"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/kkk_editview_bg_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/kkk_btn_bg"
+            android:text="保存设置"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

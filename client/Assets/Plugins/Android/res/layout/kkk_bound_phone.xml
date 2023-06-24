@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="20dp" >
+
+    <TextView
+        android:id="@+id/kkk_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#858585"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/kkk_editview_bg_height"
+            android:background="@drawable/kkk_border_stroke"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/kkk_Image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/kkk_bound_phone" />
+
+            <EditText
+                android:id="@+id/kkk_phone_number"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@color/kkk_transparent"
+                android:gravity="center_vertical"
+                android:hint="请输入手机号"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:numeric="integer"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/kkk_get_code"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/kkk_bound_phone_stroke"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="获取验证码"
+                android:textColor="@color/kkk_gonelue_nav"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/kkk_editview_bg_height"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/kkk_border_stroke"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/kkk_Image2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/kkk_bound_user" />
+
+            <EditText
+                android:id="@+id/kkk_et_code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@color/kkk_transparent"
+                android:hint="请输入验证码"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:numeric="integer"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/kkk_get_code_unbind"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/kkk_bound_phone_stroke"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="获取验证码"
+                android:textColor="@color/kkk_gonelue_nav"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/kkk_btn_bind"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/kkk_editview_bg_height"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/kkk_base_btn_selector"
+        android:text="绑定手机"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp" />
+
+</LinearLayout>

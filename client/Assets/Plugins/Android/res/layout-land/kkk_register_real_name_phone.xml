@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="450dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/kkk_dialog_black_transparent_bg"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dip"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="300dip"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/kkk_login_register_frame_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/kkk_login_register_gray"
+                        android:paddingRight="5dip" >
+
+                        <cn.kkk.sdk.ui.CustomLinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:text="手机号:"
+                                android:textColor="#fff"
+                                android:textSize="@dimen/kkk_login_register_text_label_size" />
+
+                            <EditText
+                                android:id="@+id/kkk_register_real_name_phone_number"
+                                android:layout_width="150dip"
+                                android:layout_height="@dimen/kkk_login_register_area_height"
+                                android:layout_marginLeft="10dip"
+                                android:background="#00a9aba9"
+                                android:digits="0123456789"
+                                android:hint="请输入手机号"
+                                android:maxLength="11"
+                                android:singleLine="true"
+                                android:textColor="#fff"
+                                android:textColorHint="#a9aba9"
+                                android:textSize="@dimen/kkk_login_register_text_hint_size" />
+                        </cn.kkk.sdk.ui.CustomLinearLayout>
+
+                        <TextView
+                            android:id="@+id/kkk_register_real_name_phone_get_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/kkk_org_gray_shape"
+                            android:padding="3dip"
+                            android:text="获取验证码"
+                            android:textColor="@drawable/kkk_text_color_5_selector"
+                            android:textSize="@dimen/kkk_login_register_text_fetch_code" />
+                    </RelativeLayout>
+
+                    <cn.kkk.sdk.ui.CustomLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/kkk_login_register_frame_height"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dip"
+                        android:background="@drawable/kkk_login_register_gray"
+                        android:gravity="center_vertical"
+                        android:paddingRight="5dip" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="验证码:"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/kkk_login_register_text_label_size" />
+
+                        <EditText
+                            android:id="@+id/kkk_register_real_name_phone_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/kkk_login_register_area_height"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="10dip"
+                            android:background="#00a9aba9"
+                            android:digits="0123456789"
+                            android:hint="请输入验证码"
+                            android:maxLength="6"
+                            android:singleLine="true"
+                            android:textColor="#fff"
+                            android:textColorHint="#a9aba9"
+                            android:textSize="@dimen/kkk_login_register_text_hint_size" />
+                    </cn.kkk.sdk.ui.CustomLinearLayout>
+
+                    <cn.kkk.sdk.ui.CustomLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/kkk_login_register_frame_height"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dip"
+                        android:background="@drawable/kkk_login_register_gray"
+                        android:gravity="center_vertical"
+                        android:paddingRight="5dip" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="姓名:"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/kkk_login_register_text_label_size" />
+
+                        <EditText
+                            android:id="@+id/kkk_register_real_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/kkk_login_register_area_height"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="10dip"
+                            android:background="#00a9aba9"
+                            android:hint="请输入您的名字"
+                            android:maxLength="20"
+                            android:singleLine="true"
+                            android:textColor="#fff"
+                            android:textColorHint="#a9aba9"
+                            android:textSize="@dimen/kkk_login_register_text_hint_size" />
+                    </cn.kkk.sdk.ui.CustomLinearLayout>
+
+                    <cn.kkk.sdk.ui.CustomLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/kkk_login_register_frame_height"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dip"
+                        android:background="@drawable/kkk_login_register_gray"
+                        android:gravity="center_vertical"
+                        android:paddingRight="5dip" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="身份证:"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/kkk_login_register_text_label_size" />
+
+                        <EditText
+                            android:id="@+id/kkk_register_real_name_id_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/kkk_login_register_area_height"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="10dip"
+                            android:background="#00a9aba9"
+                            android:digits="0123456789X"
+                            android:hint="请输入您的身份证"
+                            android:maxLength="18"
+                            android:singleLine="true"
+                            android:textColor="#fff"
+                            android:textColorHint="#a9aba9"
+                            android:textSize="@dimen/kkk_login_register_text_hint_size" />
+                    </cn.kkk.sdk.ui.CustomLinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:gravity="center_horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/kkk_logo_white" />
+
+                <Button
+                    android:id="@+id/kkk_register_real_name_phone_login"
+                    android:layout_width="130dip"
+                    android:layout_height="@dimen/kkk_login_register_frame_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="100dip"
+                    android:background="@drawable/kkk_gray_btn_selector"
+                    android:text="已注册, 去登录"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/kkk_login_register_text_btn_size"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/kkk_register_real_name_phone_register"
+                    android:layout_width="130dip"
+                    android:layout_height="@dimen/kkk_login_register_frame_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dip"
+                    android:background="@drawable/kkk_org_btn_selector"
+                    android:text="立即注册"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/kkk_login_register_text_btn_size"
+                    android:visibility="visible" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip" >
+
+            <CheckBox
+                android:id="@+id/kkk_register_acceptAgreement"
+                android:layout_width="17dip"
+                android:layout_height="17dip"
+                android:layout_centerVertical="true"
+                android:background="@drawable/kkk_accept_checkbox"
+                android:button="@null"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/kkk_register_real_name_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/kkk_register_acceptAgreement"
+                android:text="3K游戏网络服务协议"
+                android:textColor="@drawable/kkk_text_color_6_selector"
+                android:textSize="@dimen/kkk_login_register_text_jump_size" />
+
+            <TextView
+                android:id="@+id/kkk_register_real_name_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/kkk_help_selector"
+                android:drawablePadding="5dip"
+                android:text="帮助"
+                android:textColor="@drawable/kkk_text_color_6_selector"
+                android:textSize="@dimen/kkk_login_register_text_jump_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

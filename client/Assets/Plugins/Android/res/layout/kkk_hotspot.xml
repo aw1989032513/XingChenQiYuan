@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical" >
+
+    <cn.kkk.sdk.pull.listview.XCPullToLoadMoreListView
+        android:id="@+id/kkk_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbars="none"
+        android:paddingBottom="0dp" />
+    
+    <TextView
+        android:id="@+id/kkk_hint1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="暂无数据"
+        android:textColor="#B2B2B2"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

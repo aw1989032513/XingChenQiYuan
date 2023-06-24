@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/kkk_ll_email"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp" >
+
+    <TextView
+        android:id="@+id/kkk_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff"
+        android:text="您可以通过绑定邮箱来确保账号安全，在遗忘登录密码时，可通过邮箱进行找回。"
+        android:textColor="#858585"
+        android:gravity="center"
+        android:textSize="16dp" />
+
+    <LinearLayout
+        
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/kkk_editview_bg_height"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/kkk_password_amend_stroke" >
+
+        <ImageView
+            android:id="@+id/kkk_Image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/kkk_mail_off" />
+
+        <EditText
+            android:id="@+id/kkk_et_email"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@color/kkk_transparent"
+            android:gravity="left|center_vertical"
+            android:hint="请输入您的邮箱地址"
+            android:text=""
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#858585"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/kkk_btn_bind_email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/kkk_editview_bg_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/kkk_base_btn_selector"
+        android:text="提交验证"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp" />
+
+</LinearLayout>

@@ -1,0 +1,188 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="280dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/kkk_dialog_black_transparent_bg"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="5dip" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/kkk_logo_white" />
+
+            <TextView
+                android:id="@+id/kkk_login_account_phone_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/kkk_phone_selector"
+                android:drawablePadding="5dip"
+                android:text="手机验证登录"
+                android:textColor="@drawable/kkk_text_color_6_selector"
+                android:textSize="@dimen/kkk_login_register_text_header_size" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/kkk_login_account_username_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kkk_login_register_frame_height"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/kkk_login_register_gray"
+                android:paddingRight="5dip" >
+
+                <cn.kkk.sdk.ui.CustomLinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:text="账号:"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/kkk_login_register_text_label_size" />
+
+                    <EditText
+                        android:id="@+id/kkk_login_account_username"
+                        android:layout_width="170dip"
+                        android:layout_height="@dimen/kkk_login_register_area_height"
+                        android:layout_marginLeft="10dip"
+                        android:background="#00a9aba9"
+                        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+                        android:hint="请输入您的账号"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textColor="#fff"
+                        android:textColorHint="#a9aba9"
+                        android:textSize="@dimen/kkk_login_register_text_hint_size" />
+                </cn.kkk.sdk.ui.CustomLinearLayout>
+
+                <ImageView
+                    android:id="@+id/kkk_login_account_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="5dip"
+                    android:src="@drawable/kkk_login_register_arrow_down" />
+            </RelativeLayout>
+
+            <cn.kkk.sdk.ui.CustomRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/kkk_login_register_frame_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/kkk_login_register_gray"
+                android:paddingRight="5dip" >
+
+                <TextView
+                    android:id="@+id/kkk_login_account_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12.5dip"
+                    android:text="密码:"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/kkk_login_register_text_label_size" />
+
+                <EditText
+                    android:id="@+id/kkk_login_account_password"
+                    android:layout_width="170dip"
+                    android:layout_height="@dimen/kkk_login_register_area_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_toRightOf="@id/kkk_login_account_name"
+                    android:background="#00a9aba9"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="请输入您的密码"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textColor="#fff"
+                    android:textColorHint="#a9aba9"
+                    android:textSize="@dimen/kkk_login_register_text_hint_size" />
+            </cn.kkk.sdk.ui.CustomRelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/kkk_login_account_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/kkk_help_selector"
+                android:drawablePadding="5dip"
+                android:text="帮助"
+                android:textColor="@drawable/kkk_text_color_6_selector"
+                android:textSize="@dimen/kkk_login_register_text_jump_size" />
+
+            <TextView
+                android:id="@+id/kkk_login_account_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/kkk_forget_password"
+                android:textColor="@drawable/kkk_text_color_3_selector"
+                android:textSize="@dimen/kkk_login_register_text_hint_size" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="5dip"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/kkk_login_account_fast_register"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/kkk_login_register_frame_height"
+                android:layout_weight="1"
+                android:background="@drawable/kkk_gray_btn_selector"
+                android:text="快速注册"
+                android:textColor="#fff"
+                android:textSize="@dimen/kkk_login_register_text_btn_size" />
+
+            <Button
+                android:id="@+id/kkk_login_account_login"
+                android:layout_width="0dip"
+                android:layout_height="@dimen/kkk_login_register_frame_height"
+                android:layout_marginLeft="10dip"
+                android:layout_weight="1"
+                android:background="@drawable/kkk_org_btn_selector"
+                android:text="登录游戏"
+                android:textColor="#fff"
+                android:textSize="@dimen/kkk_login_register_text_btn_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

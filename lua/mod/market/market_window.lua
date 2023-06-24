@@ -11,15 +11,17 @@ function MarketWindow:__init(model)
         {file = AssetConfig.market_window, type = AssetType.Main}
         , {file = AssetConfig.market_textures, type = AssetType.Dep}
     }
-    self.subPanel = {nil, nil, nil}
-    self.btnTabSide = {nil, nil, nil}
-    self.nameSubPanel = {TI18N("金币市场"), TI18N("交易市场"), TI18N("出售物品")}
+    self.subPanel = {nil, nil, nil,nil}   --4个面板
+    self.btnTabSide = {nil, nil, nil,nil} --4个Tab
+    self.nameSubPanel = {TI18N("金币市场"), TI18N("交易市场"), TI18N("出售物品"),TI18N("拍卖行")}
     self.txtList = {}
 
     self.openListener = function() self:OnOpen() end
     self.hideListener = function() self:OnHide() end
     self.roleassetschangeListener = function() self:RoleAssetsListener() end
-    self.redListener = function() self:CheckRed() end
+    self.redListener = function()
+         self:CheckRed() 
+        end
     self.OnOpenEvent:Add(self.openListener)
     self.OnHideEvent:Add(self.hideListener)
 
@@ -32,15 +34,21 @@ function MarketWindow:InitPanel()
     self.gameObject.name = "MarketWindow"
     -- self.subPanel[1] = MarketGoldPanel.New(self)
     -- self.subPanel[2] = MarketSliverPanel.New(self)
-    -- self.subPanel[3] = MarketSellPanel.New(self)
+    -- self.subPanel[4] = MarketPaiMaiPanel.New(self)
     UIUtils.AddUIChild(ctx.CanvasContainer, self.gameObject)
+
+    self.rectTransform = self.gameObject:GetComponent(RectTransform)
+    self.rectTransform.offsetMin =  Vector2(0,0)
+    self.rectTransform.offsetMax =  Vector2(0,0)
+
 
     local mainObj = self.gameObject.transform:Find("Main")
     local tabButtonGroup = mainObj:Find("TabButtonGroup")
 
     self.titleText = mainObj:Find("Title/Text"):GetComponent(Text)
 
-    for i=1,3 do
+    -- 按钮的事件
+    for i=1,4 do
         local child = tabButtonGroup:GetChild(i - 1)
         self.btnTabSide[i] = child:GetComponent(Button)
         self.btnTabSide[i].onClick:AddListener(function ()
@@ -55,7 +63,7 @@ function MarketWindow:InitPanel()
     self.btnClose = mainObj:Find("CloseButton"):GetComponent(Button)
     self.btnClose.onClick:AddListener(function () self:OnClickClose() end)
 
-    if RoleManager.Instance.RoleData.lev < 20 then
+    if RoleManager.Instance.RoleData.lev < 20 then    -- 如果等级小于20级
         self.btnTabSide[3].gameObject:SetActive(false)
     else
         self.btnTabSide[3].gameObject:SetActive(true)
@@ -68,8 +76,8 @@ function MarketWindow:OnOpen()
     -- NoticeManager.Instance:FloatTipsByString("又打开了啊啊啊啊啊")
     self:RemoveListeners()
     MarketManager.Instance.onUpdateRed:AddListener(self.redListener)
-    if self.model.currentTab > 3 then
-        self.model.currentTab = 3
+    if self.model.currentTab > 4 then
+        self.model.currentTab = 4
     end
     self:TabChange(self.model.currentTab)
     self:CheckRed()
@@ -87,7 +95,7 @@ function MarketWindow:TabChange(i)
     self:UpdateTab()
 
 
-    for j=1,3 do
+    for j=1,4 do
         if self.subPanel[j] ~= nil then
             self.subPanel[j]:Hiden()
         end
@@ -95,11 +103,13 @@ function MarketWindow:TabChange(i)
     self.titleText.text = self.nameSubPanel[i]
     if self.subPanel[i] == nil then
         if i == 1 then
-            self.subPanel[i] = MarketGoldPanel.New(self)
+            self.subPanel[i] = MarketGoldPanel.New(self)   --金币市场初始化
         elseif i == 2 then
-            self.subPanel[i] = MarketSliverPanel.New(self)
+            self.subPanel[i] = MarketSliverPanel.New(self) --交易市场
         elseif i == 3 then
-            self.subPanel[i] = MarketSellPanel.New(self)
+            self.subPanel[i] = MarketSellPanel.New(self)   --出售物品 --
+        elseif i == 4 then  
+            self.subPanel[i] = MarketTestPaimaiPanel.New(self)   --拍卖行
         end
     end
     if self.subPanel[i] == nil then
@@ -131,7 +141,7 @@ function MarketWindow:OnClickClose()
 end
 
 function MarketWindow:UpdateTab()
-    for i=1,3 do
+    for i=1,4 do
         self.btnTabSide[i]:GetComponent(Image).sprite = PreloadManager.Instance:GetSprite(AssetConfig.base_textures, "TabButton1Normal")
         self.txtList[i].color = ColorHelper.TabButton1Normal
     end
@@ -145,7 +155,7 @@ end
 
 function MarketWindow:RoleAssetsListener()
     if self.subPanel ~= nil then
-        for i = 1, 3 do
+        for i = 1, 4 do
             if self.subPanel[i] ~= nil then
                 self.subPanel[i]:RoleAssetsListener()
             end
@@ -161,7 +171,7 @@ function MarketWindow:OnHide()
         end
     end
 end
-
+-- 红点系统
 function MarketWindow:CheckRed()
     local red = false
 
@@ -195,6 +205,17 @@ function MarketWindow:CheckRed()
     red = red or MarketManager.Instance.redPointDic[3][1]
     if self.btnTabSide ~= nil and self.btnTabSide[3] ~= nil then
         self.btnTabSide[3].transform:Find("RedPoint").gameObject:SetActive(red == true)
+    end
+   -- 检查拍卖行
+    for _,dic in pairs(MarketManager.Instance.redPointDic[4]) do
+        if dic ~= nil then
+            for _,v in pairs(dic) do
+                red = red or v
+            end
+        end
+    end
+    if self.btnTabSide ~= nil and self.btnTabSide[4] ~= nil then
+        self.btnTabSide[4].transform:Find("RedPoint").gameObject:SetActive(red == true)
     end
 end
 

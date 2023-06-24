@@ -33,7 +33,7 @@ function BaseClass(super)
 
 		-- 注册一个delete方法
 		obj.DeleteMe = function(self)
-            -- 如果这行报错（attempt to index local 'self' (a nil value)），看一下object:DeleteMe()是不是写成object.DeleteMe()
+            -- 如果这行报错（attempt  to index local 'self' (a nil value)），看一下object:DeleteMe()是不是写成object.DeleteMe()
 			local now_super = self._class_type
 			while now_super ~= nil do
 				local super = now_super.super

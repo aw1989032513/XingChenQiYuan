@@ -62,7 +62,7 @@ function MarketGoldPanel:InitPanel()
     local model = self.model
 
     self.subIndex = {}
-    local tabs = DataMarketGold.data_market_gold_tab
+    local tabs = DataMarketGold.data_market_gold_tab     -- 23 根据data_market_gold_tab  这个表配置
     for i=1,DataMarketGold.data_market_gold_tab_length do
         if self.subIndex[tabs[i].catalg_1] == nil then
             self.subIndex[tabs[i].catalg_1] = {}
@@ -73,11 +73,12 @@ function MarketGoldPanel:InitPanel()
         end
     end
 
+    --按钮列表数量
     local btnList = DataMarketGold.data_market_gold_tab
     local btnContainer = self.gameObject.transform:Find("Bar/mask/Container")
     local btnTemplate = btnContainer:Find("Button").gameObject
     btnTemplate:SetActive(false)
-    local subbtnTemplate = btnContainer:Find("SubButton").gameObject
+    local subbtnTemplate = btnContainer:Find("SubButton").gameObject  -- 基础属性
     subbtnTemplate:SetActive(false)
 
     local item = nil
@@ -94,7 +95,7 @@ function MarketGoldPanel:InitPanel()
                 self.subbtnList[v.catalg_1] = {}
 
                 self.openCatalg2List[v.catalg_1] = v.catalg_2
-
+   -- 左侧列表的主按钮
                 item.transform:Find("MainButton"):GetComponent(Button).onClick:AddListener(function ()
                     model.lastGoldMain = model.currentGoldMain
                     model.currentGoldMain = v.catalg_1
@@ -104,14 +105,14 @@ function MarketGoldPanel:InitPanel()
                         model.selectPos = nil
                     end
                     model.targetBaseId = nil
-                    self:UpdateMainButton()
-                    self:UpdateSubButton()
+                    self:UpdateMainButton()  -- 更新按钮状态和箭头，高亮图片
+                    self:UpdateSubButton()   -- 点击的时候，更新次级列表
                     self:ReloadBuyPanel()
                 end)
                 item.transform:Find("MainButton/Text"):GetComponent(Text).text = v.catalg_1_name
                 item.transform:Find("MainButton/Image"):GetComponent(Image).sprite = self.assetWrapper:GetSprite(AssetConfig.market_textures, v.icon)
             end
-
+    -- 左侧列表按钮的次要列表按钮
             local subbtnList = self.subbtnList[v.catalg_1]
             subbtnList[v.catalg_2] = GameObject.Instantiate(subbtnTemplate)
             local subbtn = subbtnList[v.catalg_2]
@@ -330,7 +331,7 @@ function MarketGoldPanel:OnOpen()
     MarketManager.Instance.onUpdateRed:AddListener(self.redListener)
     EventMgr.Instance:AddListener(event_name.world_lev_change, self.worldLevListener)
     EventMgr.Instance:AddListener(event_name.role_level_change, self.levelListener)
-    EventMgr.Instance:AddListener(event_name.market_gold_update, self.onReloadGoldMarketListener)
+    EventMgr.Instance:AddListener(event_name.market_gold_update, self.onReloadGoldMarketListener)  -- 数据的更新
 end
 
 function MarketGoldPanel:OnHide()
@@ -404,16 +405,18 @@ function MarketGoldPanel:UpdateMainButton()
         end
         v.transform:Find("MainButton/NotifyPoint").gameObject:SetActive(red)
     end
+    --DefaultButton9 是高亮的图片
     if self.boolBarBtnOpenList[catalg_1] == true then
         self.btnObjList[catalg_1].transform:Find("MainButton/Bg"):GetComponent(Image).sprite = PreloadManager.Instance:GetSprite(AssetConfig.base_textures, "DefaultButton9")
         self.btnObjList[catalg_1].transform:Find("MainButton/Text"):GetComponent(Text).color = ColorHelper.DefaultButton9
     end
 end
 
+-- 刷新次列表
 function MarketGoldPanel:UpdateSubButton()
     local model = self.parent.model
-    local catalg_1 = model.currentGoldMain
-    local catalg_2 = model.currentGoldSub
+    local catalg_1 = model.currentGoldMain    --这个代表打开了哪个主按钮
+    local catalg_2 = model.currentGoldSub     --这个玩意代表下表，用来次列表来显示高亮的
     if catalg_2 == 0 then
         catalg_2 = self.openCatalg2List[catalg_1]
     end
@@ -452,7 +455,7 @@ function MarketGoldPanel:UpdateSubButton()
 
     end
 end
-
+---加载购买面板
 function MarketGoldPanel:ReloadBuyPanel()
     self:UpdateBuyPanel()
 
@@ -673,7 +676,7 @@ function MarketGoldPanel:CheckOpen()
             sublist[k].gameObject:SetActive(v)
             bool = bool or v
         end
-        item.gameObject:SetActive(bool)
+        item.gameObject:SetActive(bool) -- 这个Item指的btn7   goldOpenTab存在各个组件的true和false
     end
 end
 

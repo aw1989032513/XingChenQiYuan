@@ -1,0 +1,24 @@
+{
+    "debug" : "true",                       // 是否debug版本
+    "editor" : "false",                     // 是否编辑环境
+    "apk_version" : "15122615",             // APK包版本号，用来强更
+    "res_version" : "201508080808",         // 当前版本号这个值不要改
+    "check_apk" : "false",                   // 是否检查强更 
+    "remote_log" : "true",                 // 是否开户bugly功能
+
+    "server_list_path" : "",                // 读取服务器列表路径
+    // "server_list_path" : "http://192.168.0.18/apkcheck/server_list.php?platformChanleId={platformChanleId}&chanleId={chanleId}",                // 读取服务器列表路径
+
+    "check_apk_path" : "http://192.168.0.18/apkcheck",
+    // "check_apk_path" : "http://apkcheck.shiyuegame.com/apkcheck",
+    // "check_apk_path" : "http://apkcheck.shiyuegame.com/apkcheck_audit",
+
+    // "cdn_path" : "http://cdnres.xcqy.shiyuegame.com/xcqy"
+    // "cdn_path" : "http://cdnres.xcqy.shiyuegame.com/xcqy_audit"
+    "cdn_path" : "http://192.168.1.101/res",
+    // "cdn_path" : "http://192.168.0.18"
+    // "cdn_path" : "http://192.168.1.23/mobile"
+
+    "download_apk_path" : "http://192.168.1.101/res/apk",
+    "first_cdn_path" : "http://192.168.1.101/res"
+}
