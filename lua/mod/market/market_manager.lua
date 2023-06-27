@@ -46,7 +46,12 @@ function MarketManager:__init()
         {
             {},
         },
-        {false},
+        {
+            false
+        },
+        {
+            {}
+        }
     }
 
     self.sliverDataType = {

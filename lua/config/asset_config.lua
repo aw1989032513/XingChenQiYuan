@@ -53,6 +53,7 @@ AssetConfig.market_window = "prefabs/ui/market/marketwindow.unity3d"    -- 市�
 AssetConfig.market_gold_panel = "prefabs/ui/market/market1.unity3d"     -- 金币市场分页
 AssetConfig.market_sliver_panel = "prefabs/ui/market/market2.unity3d"   -- 银币市场分页
 AssetConfig.market_sell_panel = "prefabs/ui/market/market3.unity3d"     -- 出售物品分页
+AssetConfig.market_paimai_panel = "prefabs/ui/market/market4.unity3d"   -- 拍卖行分页
 AssetConfig.market_sell_select_window = "prefabs/ui/market/sellwindow.unity3d" -- 选择物品出售窗口
 AssetConfig.market_oneclick_setting = "prefabs/ui/market/defaultsellpanel.unity3d" -- 一键上架默认设置
 
