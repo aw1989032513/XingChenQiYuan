@@ -108,8 +108,8 @@ function MarketWindow:TabChange(i)
             self.subPanel[i] = MarketSliverPanel.New(self) --交易市场
         elseif i == 3 then
             self.subPanel[i] = MarketSellPanel.New(self)   --出售物品 --
-        elseif i == 4 then
-            self.subPanel[i] = MarketPaiMaiPanel.New(self)   --拍卖行
+        elseif i == 4 then  
+            self.subPanel[i] = MarketTestPaimaiPanel.New(self)   --拍卖行
         end
     end
     if self.subPanel[i] == nil then
