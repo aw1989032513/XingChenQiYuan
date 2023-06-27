@@ -1,0 +1,86 @@
+{
+    "group": "3kwan-ios-jailbreak",
+
+    "libs": [
+        "libz.1.2.5.tbd",
+        "libMobileGestalt.tbd",
+        "libxml2.2.tbd",
+        "libsqlite3.0.tbd",
+        "libc++.tbd",
+    ],
+
+    "frameworks": [
+        "UIKit.framework",
+        "Foundation.framework",
+        "CoreGraphics.framework",
+        "QuartzCore.framework",
+        "MobileCoreServices.framework",
+        "SystemConfiguration.framework",
+        "Security.framework",
+        "Adsupport.framework",
+        "CoreLocation.framework",
+        "AudioToolbox.framework",
+        "AVFoundation.framework",
+        "CoreTelephony.framework",
+        "EventKit.framework",
+        "EventKitUI.framework",
+        "MediaPlayer.framewrok",
+        "MessageUI.framework",
+        "Social.framework",
+        "StoreKit.framework",
+	"CFNetwork.framework",
+	"CoreBluetooth.framework",
+    ],
+
+    "headerpaths": [
+        "${SDK_DIR}/usr/include/libxml2",
+    ],
+
+    "files": [
+        "3kwan-ios-jailbreak/K3IntegratedSDK.framework",
+        "3kwan-ios-jailbreak/KKKPlatformSDK.framework",
+        "3kwan-ios-jailbreak/AlipaySDK.framework",
+    ],
+
+    "folders": [
+        "3kwan-ios-jailbreak/src/",
+        "3kwan-ios-jailbreak/etc/",
+        "3kwan-ios-jailbreak/libs/",
+        "3kwan-ios-jailbreak/res/",
+    ],
+
+    "plist": {
+        "UIRequiresFullScreen": true,
+        "CFBundleVersion": "1.2.0",
+        "CFBundleIdentifier": "$(PRODUCT_BUNDLE_IDENTIFIER)",
+        "NSAppTransportSecurity": {
+            "NSAllowsArbitraryLoads": true,
+        },
+	"UIBackgroundModes": ["fetch", "remote-notification"],
+        "LSApplicationQueriesSchemes": [ "alipay", "weixin", "mqqapiwallet", "safepay", ],
+        "CFBundleURLTypes": [
+            {
+                "CFBundleTypeRole": "Editor",
+                "CFBundleURLName": "3kwan",
+                "CFBundleURLSchemes": [ "3kwan-347" ],
+            }
+        ],
+    },
+
+    "embed_binaries": [
+    ],
+
+    "linker_flags": [
+        "-ObjC",
+        "-licucore",
+    ],
+
+    "compiler_flags": [
+    ],
+
+    "excludes": [
+        "^.*.meta$",
+        "^.*.mdown$",
+        "^.*.pdf$"
+    ],
+}

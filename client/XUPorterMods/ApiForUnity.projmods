@@ -1,0 +1,53 @@
+{
+    "group": "ApiForUnity",
+
+    "libs": [
+        "libz.1.2.5.dylib",
+    ],
+
+    "frameworks": [
+        "CoreLocation.framework",
+        "CoreTelephony.framework",
+        "AVFoundation.framework",
+        "AddressBook.framework",
+        "AudioToolbox.framework",
+        "SystemConfiguration.framework",
+        "QuartzCore.framework",
+        "UIKit.framework",
+        "Foundation.framework",
+        "CoreGraphics.framework",
+        "Security.framework",
+        "UserNotifications.framework"
+    ],
+
+    "headerpaths": [
+    ],
+
+    "files": [
+        "ApiForUnity/iflyMSC.framework",
+        "ApiForUnity/Bugly.framework",
+        "ApiForUnity/baseapi.framework",
+    ],
+
+    "folders": [
+        "ApiForUnity/src/",
+    ],
+
+    "plist": {
+    },
+
+    "embed_binaries": [
+    ],
+
+    "linker_flags": [
+    ],
+
+    "compiler_flags": [
+    ],
+
+    "excludes": [
+        "^.*.meta$",
+        "^.*.mdown$",
+        "^.*.pdf$"
+    ],
+}

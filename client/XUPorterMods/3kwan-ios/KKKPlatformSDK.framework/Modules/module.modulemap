@@ -1,0 +1,6 @@
+framework module KKKPlatformSDK {
+  umbrella header "KKKPlatformSDK.h"
+
+  export *
+  module * { export * }
+}

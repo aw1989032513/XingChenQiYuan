@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/kkk_bg_color" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/kkk_bg_color"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <RelativeLayout
+                    android:id="@+id/kkk_rl_gift_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp" >
+
+                    <ImageView
+                        android:id="@+id/kkk_iv_gift_icon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginTop="0dp"
+                        android:src="@drawable/kkk_gifts" />
+
+                    <TextView
+                        android:id="@+id/kkk_gift_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/kkk_iv_gift_icon"
+                        android:layout_marginLeft="2dp"
+                        android:layout_toRightOf="@id/kkk_iv_gift_icon"
+                        android:text="新手礼包"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/kkk_beleft_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/kkk_gift_name"
+                        android:layout_below="@id/kkk_gift_name"
+                        android:layout_marginTop="2dp"
+                        android:text="2017年1月1日-2017年2月1日"
+                        android:textColor="#696969"
+                        android:textSize="13sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/kkk_gift_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/kkk_beleft_time"
+                        android:layout_below="@id/kkk_beleft_time"
+                        android:layout_marginTop="2dp"
+                        android:text="剩余"
+                        android:textColor="#696969"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/kkk_gift_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_alignBaseline="@id/kkk_iv_gift_icon"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/kkk_gift_game_detail_state"
+                        android:gravity="center"
+                        android:text="目前可领取"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"
+                        android:textColor="@color/kkk_gonelue_nav"
+                        android:textSize="13sp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/kkk_line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_below="@id/kkk_rl_gift_name"
+                    android:background="@color/kkk_line" />
+
+                <View
+                    android:id="@+id/kkk_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_below="@id/kkk_line1"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/kkk_line" />
+
+                <RelativeLayout
+                    android:id="@+id/kkk_rl_gift_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/kkk_line2"
+                    android:background="#FFFFFF"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="10dp" >
+
+                    <View
+                        android:id="@+id/kkk_land_line"
+                        android:layout_width="4dp"
+                        android:layout_height="18dp"
+                        android:background="@color/kkk_gonelue_nav" />
+
+                    <TextView
+                        android:id="@+id/kkk_hint_gift_content_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@id/kkk_land_line"
+                        android:text="礼包内容"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:id="@+id/kkk_gift_content_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_below="@id/kkk_hint_gift_content_title"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/kkk_line" />
+
+                    <TextView
+                        android:id="@+id/kkk_hint_gift_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/kkk_hint_gift_content_title"
+                        android:layout_below="@id/kkk_gift_content_line"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#696969"
+                        android:text="100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:id="@+id/kkk_gift_content_line2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_below="@id/kkk_hint_gift_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/kkk_line" />
+
+                    <TextView
+                        android:id="@+id/kkk_hint_gift_content_jiazhi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/kkk_hint_gift_content"
+                        android:layout_below="@id/kkk_gift_content_line2"
+                        android:layout_marginTop="10dp"
+                        android:text="参考价值"
+                        android:textColor="#696969"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/kkk_hint_gift_content_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/kkk_hint_gift_content_jiazhi"
+                        android:layout_alignParentRight="true"
+                        android:text="20元"
+                        android:textColor="#696969"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/kkk_line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_below="@id/kkk_rl_gift_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/kkk_line" />
+
+                <View
+                    android:id="@+id/kkk_line5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_below="@id/kkk_line4"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/kkk_line" />
+
+                <RelativeLayout
+                    android:id="@+id/kkk_rl_gift_duihuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/kkk_line5"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="#FFFFFF"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="10dp" >
+
+                    <View
+                        android:id="@+id/kkk_land_line2"
+                        android:layout_width="4dp"
+                        android:layout_height="18dp"
+                        android:background="@color/kkk_gonelue_nav" />
+
+                    <TextView
+                        android:id="@+id/kkk_hint_gift_duihuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@id/kkk_land_line2"
+                        android:text="兑换方法"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:id="@+id/kkk_gift_duihuan_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_below="@id/kkk_hint_gift_duihuan"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/kkk_line" />
+
+                    <TextView
+                        android:id="@+id/kkk_hint_gift_duihuan_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/kkk_hint_gift_duihuan"
+                        android:layout_below="@id/kkk_gift_duihuan_line"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#696969"
+                        android:text="100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝100元宝"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:id="@+id/kkk_gift_duihuan_line2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_below="@id/kkk_hint_gift_duihuan_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/kkk_line" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/kkk_hint_gift_duihuan"
+                        android:layout_below="@id/kkk_gift_duihuan_line2"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/kkk_hint_gift_duihuan_youxiao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="有效期"
+                            android:textColor="#696969"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/kkk_hint_gift_duihuan_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="0dp"
+                            android:gravity="right"
+                            android:text="2017.1.1"
+                            android:textColor="#696969"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/kkk_line6"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/kkk_line" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="0dp" >
+
+        <Button
+            android:id="@+id/kkk_btn_get_gift"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/kkk_gift_button_height"
+            android:layout_margin="4dp"
+            android:background="@drawable/kkk_base_btn_selector"
+            android:text="一键领取礼包"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</RelativeLayout>

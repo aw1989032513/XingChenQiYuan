@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:gravity="center"
+     >
+<LinearLayout 
+    android:id="@+id/kkk_parent_1"
+    android:layout_width="310dip"
+    android:layout_height="280dip"
+    android:layout_gravity="center"
+    android:background="@drawable/kkk_bg"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:contentDescription="@null"
+        android:src="@drawable/kkk_logo_white" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@null"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/kkk_notice_action_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:textColor="@color/kkk_white"
+                android:textSize="20sp" />
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@+id/kkk_notice_action_ok_ll"
+                android:layout_below="@id/kkk_notice_action_title"
+                android:layout_margin="5dip" >
+
+                <TextView
+                    android:id="@+id/kkk_notice_action_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/kkk_white"
+                    android:textSize="15sp" />
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/kkk_notice_action_ok_ll"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@null"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/kkk_notice_action_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@null"
+                    android:src="@drawable/kkk_agree_btn" 
+                    android:visibility="visible"/>
+
+                <ProgressBar
+                    android:id="@+id/kkk_notice_action_progress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp" 
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"/>
+                
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
+</RelativeLayout>

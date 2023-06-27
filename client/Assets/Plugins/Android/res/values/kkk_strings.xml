@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="kkk_app_name">library_3kwan_v4.0</string>
+    <string name="kkk_hello_world">Hello world!</string>
+    
+    <string name="kkk_init_waiting">正在启动,请稍等</string>
+    
+    <string name="kkk_forget_password"><u>忘记账号/密码</u></string>
+
+</resources>

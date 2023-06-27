@@ -1,0 +1,83 @@
+{
+    "group": "3kwan-ios",
+
+    "libs": [
+        "libz.1.2.5.dylib",
+        "libMobileGestalt.dylib",
+        "libxml2.2.dylib",
+        "libsqlite3.0.dylib",
+        "libc++.dylib",
+    ],
+
+    "frameworks": [
+        "UIKit.framework",
+        "Foundation.framework",
+        "CoreGraphics.framework",
+        "QuartzCore.framework",
+        "MobileCoreServices.framework",
+        "SystemConfiguration.framework",
+        "Security.framework",
+        "Adsupport.framework",
+        "CoreLocation.framework",
+        "AudioToolbox.framework",
+        "AVFoundation.framework",
+        "CoreTelephony.framework",
+        "EventKit.framework",
+        "EventKitUI.framework",
+        "MediaPlayer.framewrok",
+        "MessageUI.framework",
+        "Social.framework",
+        "StoreKit.framework",
+	    "CFNetwork.framework",
+	    "CoreBluetooth.framework",
+        "WebKit.framework",
+    ],
+
+    "headerpaths": [
+        "${SDK_DIR}/usr/include/libxml2",
+    ],
+
+    "files": [
+        "3kwan-ios/K3IntegratedSDK.framework",
+        "3kwan-ios/KKKPlatformSDK.framework",
+    ],
+
+    "folders": [
+        "3kwan-ios/src/",
+        "3kwan-ios/etc/",
+        "3kwan-ios/libs/",
+        "3kwan-ios/res/",
+    ],
+
+    "plist": {
+        "CFBundleDevelopmentRegion": "China",
+	"NSPhotoLibraryUsageDescription": "应用要访问您的相册",
+	"NSBluetoothPeripheralUsageDescription": "应用要访问您的蓝牙",
+	"NSCameraUsageDescription": "应用要访问您的相机",
+	"NSMicrophoneUsageDescription": "应用要访问您的麦克风",
+        "UIRequiresFullScreen": true,
+        "CFBundleVersion": "2.3.4",
+        "CFBundleIdentifier": "$(PRODUCT_BUNDLE_IDENTIFIER)",
+	    "UIBackgroundModes": ["fetch", "remote-notification"],
+        "NSAppTransportSecurity": {
+            "NSAllowsArbitraryLoads": true,
+        },
+    },
+
+    "embed_binaries": [
+    ],
+
+    "linker_flags": [
+        "-ObjC",
+        "-licucore",
+    ],
+
+    "compiler_flags": [
+    ],
+
+    "excludes": [
+        "^.*.meta$",
+        "^.*.mdown$",
+        "^.*.pdf$"
+    ],
+}

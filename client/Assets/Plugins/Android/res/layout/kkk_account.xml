@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#000000" >
+
+        <Button
+            android:id="@+id/kkk_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/kkk_transparent"
+            android:drawableLeft="@drawable/kkk_icon_back"
+            android:text="返回"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/kkk_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="个人中心"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:textSize="18sp" />
+        
+        <ImageView
+            android:id="@+id/kkk_close"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/kkk_header_close" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/kkk_center_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/kkk_account_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/kkk_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/kkk_line" />
+
+        <RadioGroup
+            android:id="@+id/kkk_rg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/kkk_btn_hot"
+                style="@style/radiostyle"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="4dp"
+                android:background="#FFFFFF"
+                android:checked="true"
+                android:drawableTop="@drawable/kkk_home_hots_on"
+                android:text="热点" />
+
+            <RadioButton
+                android:id="@+id/kkk_btn_libao"
+                style="@style/radiostyle"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="4dp"
+                android:background="#FFFFFF"
+                android:drawableTop="@drawable/kkk_home_gifts_on"
+                android:text="礼包" />
+
+            <RadioButton
+                android:id="@+id/kkk_btn_gonglue"
+                style="@style/radiostyle"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="4dp"
+                android:background="#FFFFFF"
+                android:drawableTop="@drawable/kkk_home_gonglue_on"
+                android:text="攻略" />
+
+            <RadioButton
+                android:id="@+id/kkk_btn_account"
+                style="@style/radiostyle"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="4dp"
+                android:background="#FFFFFF"
+                android:drawableTop="@drawable/kkk_home_account_on"
+                android:text="账号" />
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>

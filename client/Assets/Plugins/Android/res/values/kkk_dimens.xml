@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- 顶部按钮栏高度 -->
+    <dimen name="kkk_area_pickerview_topbar_height">44dp</dimen>
+    <!-- 顶部按钮paddingLeft -->
+    <dimen name="kkk_area_pickerview_topbar_paddingleft">10dp</dimen>
+    <!-- 顶部按钮paddingRight -->
+    <dimen name="kkk_area_pickerview_topbar_paddingright">30dp</dimen>
+    <!-- 顶部按钮文字大小 -->
+    <dimen name="kkk_area_pickerview_topbar_btn_textsize">20sp</dimen>
+    <dimen name="kkk_area_pickerview_topbar_title_textsize">21sp</dimen>
+    <dimen name="kkk_editview_bg_height">45dp</dimen>
+    <dimen name="kkk_gift_button_height">31dp</dimen>
+    
+    <dimen name="kkk_login_register_text_fetch_code">11sp</dimen>
+    <dimen name="kkk_login_register_text_header_size">13sp</dimen>
+    <dimen name="kkk_login_register_text_label_size">15sp</dimen>
+    <dimen name="kkk_login_register_text_hint_size">13sp</dimen>
+    <dimen name="kkk_login_register_text_jump_size">13sp</dimen>
+    <dimen name="kkk_login_register_text_btn_size">15sp</dimen>
+    <dimen name="kkk_login_register_frame_height">38dip</dimen>
+    <dimen name="kkk_login_register_area_height">20dip</dimen>
+
+</resources>

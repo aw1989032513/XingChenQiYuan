@@ -1,0 +1,3 @@
+D:\WorkSpace\Zip\icsharpcode-SharpZipLib-e012155\icsharpcode-SharpZipLib-e012155\bin\ICSharpCode.SharpZipLib.xml
+D:\WorkSpace\Zip\icsharpcode-SharpZipLib-e012155\icsharpcode-SharpZipLib-e012155\bin\ICSharpCode.SharpZipLib.dll
+D:\WorkSpace\Zip\icsharpcode-SharpZipLib-e012155\icsharpcode-SharpZipLib-e012155\src\obj\Release\ICSharpCode.SharpZipLib.dll

@@ -1,0 +1,67 @@
+{
+    "group": "ShareSDK",
+
+    "libs": [
+	"libicucore.dylib",
+    	"libz.dylib",
+	"libstdc++.dylib",
+	"libsqlite3.dylib",
+    ],
+
+    "frameworks": [
+        "JavaScriptCore.framework",
+    	"ImageIO.framework",
+    ],
+
+    "headerpaths": [
+    ],
+
+    "files": [
+	"ShareSDK/ShareSDK.framework",
+    	"ShareSDK/Support/Required/MOBFoundation.framework",
+    	"ShareSDK/Support/Required/ShareSDKConnector.framework",
+    	"ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenAPI.framework",
+    ],
+
+    "folders": [
+        "ShareSDK/Support/",
+        "ShareSDK/src/",
+    ],
+
+    "plist": {
+	"CFBundleURLTypes": [
+		{"CFBundleURLName":"$(PRODUCT_BUNDLE_IDENTIFIER)", "CFBundleTypeRole": "Editor", "CFBundleURLSchemes": ["wxc0d292d7bf417dd3","QQ41E64017","wb2050013913"]}
+	],
+	"LSApplicationQueriesSchemes": [
+		"wechat",
+		"weixin",
+		"mqqOpensdkSSoLogin",
+		"mqqopensdkapiV2",
+		"mqqopensdkapiV3",
+		"wtloginmqq2",
+		"mqq",
+		"mqqapi",
+		"sinaweibohdsso",
+		"sinaweibosso",
+		"weibosdk2.5",
+		"weibosdk",
+		"sinaweibohd",
+		"sinaweibo",
+	],
+    },
+
+    "embed_binaries": [
+    ],
+
+    "linker_flags": [
+    ],
+
+    "compiler_flags": [
+    ],
+
+    "excludes": [
+        "^.*.meta$",
+        "^.*.mdown$",
+        "^.*.pdf$"
+    ],
+}

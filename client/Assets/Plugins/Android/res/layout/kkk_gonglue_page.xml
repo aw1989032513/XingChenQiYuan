@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/kkk_gonelue_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/kkk_base_selector"
+        android:cacheColorHint="@color/kkk_transparent"
+        android:divider="@color/kkk_bg_color" >
+    </ListView>
+    
+    <TextView
+        android:id="@+id/kkk_hint1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:background="#EBEBEB"
+        android:text="暂无数据"
+        android:textColor="#B2B2B2"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ListView
+        android:id="@+id/kkk_login_select_list_view"
+        android:layout_width="260dip"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/kkk_login_select_line"
+        android:fadingEdge="none"
+        android:listSelector="@drawable/kkk_login_select_bg"
+        android:scrollbars="none" >
+    </ListView>
+
+</LinearLayout>

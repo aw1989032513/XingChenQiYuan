@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/kkk_bg_color"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
+
+    <ViewStub
+        android:id="@+id/viewstub_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/kkk_viewstub_gift" />
+
+    <ViewStub
+        android:id="@+id/viewstub_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/kkk_viewstub_gift_nodata" />
+
+</LinearLayout>
