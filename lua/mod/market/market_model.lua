@@ -7,6 +7,8 @@ function MarketModel:__init()
     self.goldHistory = {}
     self.currentTab = nil       -- 当前标签页
     self.goldItemList = {}
+    self.paimaiBuyItemList = {}
+    self.paimaiGongShiItemList = {}
     self.sliverItemList = {nil, nil, nil, nil, nil}     -- 根据类型
     self.sellCellList = {}
     self.sellItemDic = {}
@@ -21,6 +23,19 @@ function MarketModel:__init()
     self.currentTab = 1
     self.currentGoldMain = 5
     self.currentGoldSub = 1
+    
+
+
+    -- self.paimaiOpenTab = {}
+    -- for k,v in ipairs(DataMarketTbank.data_market_tbank_subcategory) do
+    --     self.paimaiOpenTab[v.catid] = self.paimaiOpenTab[v.catid] or {}
+    --     for s, t in ipairs(v) do
+    --         self.paimaiOpenTab[v.catid][s] = true
+    --     end
+    -- end
+    self.currentPaiMaiMain = 1
+    self.currentPaiMaiSub = 1
+
 
     self.silverIdToClasses = {
         [23711] = 1,
@@ -41,6 +56,7 @@ function MarketModel:__init()
             table.sort(v, function(a,b) return a[1] < b[1] end)
         end
     end
+
 
 end
 

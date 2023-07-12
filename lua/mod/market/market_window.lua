@@ -108,8 +108,8 @@ function MarketWindow:TabChange(i)
             self.subPanel[i] = MarketSliverPanel.New(self) --交易市场
         elseif i == 3 then
             self.subPanel[i] = MarketSellPanel.New(self)   --出售物品 --
-        elseif i == 4 then  
-            self.subPanel[i] = MarketTestPaimaiPanel.New(self)   --拍卖行
+        elseif i == 4 then
+            self.subPanel[i] = MarketPaiMaiPanel.New(self)   --拍卖行 --
         end
     end
     if self.subPanel[i] == nil then
@@ -152,7 +152,7 @@ function MarketWindow:UpdateTab()
     self.btnTabSide[self.model.currentTab]:GetComponent(Image).sprite = PreloadManager.Instance:GetSprite(AssetConfig.base_textures, "TabButton1Select")
     self.txtList[self.model.currentTab].color = ColorHelper.TabButton1Select
 end
-
+-- 角色资产发生变化
 function MarketWindow:RoleAssetsListener()
     if self.subPanel ~= nil then
         for i = 1, 4 do

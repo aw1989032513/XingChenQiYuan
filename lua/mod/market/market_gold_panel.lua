@@ -100,7 +100,7 @@ function MarketGoldPanel:InitPanel()
                     model.lastGoldMain = model.currentGoldMain
                     model.currentGoldMain = v.catalg_1
                     if model.lastGoldMain ~= model.currentGoldMain then
-                        model.currentGoldSub = self.subIndex[model.currentGoldMain][1]
+                        model.currentGoldSub = self.subIndex[model.currentGoldMain][1]   --2
                         model.goldChosenBaseId = nil
                         model.selectPos = nil
                     end
@@ -113,9 +113,9 @@ function MarketGoldPanel:InitPanel()
                 item.transform:Find("MainButton/Image"):GetComponent(Image).sprite = self.assetWrapper:GetSprite(AssetConfig.market_textures, v.icon)
             end
     -- 左侧列表按钮的次要列表按钮
-            local subbtnList = self.subbtnList[v.catalg_1]
-            subbtnList[v.catalg_2] = GameObject.Instantiate(subbtnTemplate)
-            local subbtn = subbtnList[v.catalg_2]
+            local tempsubbtnList = self.subbtnList[v.catalg_1]
+            tempsubbtnList[v.catalg_2] = GameObject.Instantiate(subbtnTemplate)
+            local subbtn = tempsubbtnList[v.catalg_2]
             subbtn.transform:SetParent(item.transform)
             subbtn.transform.localScale = Vector3.one
             subbtn.name = "sub_"..v.catalg_1.."_"..v.catalg_2
@@ -317,7 +317,7 @@ function MarketGoldPanel:OnOpen()
         end
     end
     if noSub then
-        model.currentGoldSub = self.subIndex[model.currentGoldMain][1]
+        model.currentGoldSub = self.subIndex[model.currentGoldMain][1]  --2
     end
 
     self:CheckOpen()
@@ -327,7 +327,6 @@ function MarketGoldPanel:OnOpen()
     self:ReloadBuyPanel()
 
     self:RemoveListeners()
-    -- MarketManager.Instance.onReloadGoldMarket:AddListener(self.onReloadGoldMarketListener)
     MarketManager.Instance.onUpdateRed:AddListener(self.redListener)
     EventMgr.Instance:AddListener(event_name.world_lev_change, self.worldLevListener)
     EventMgr.Instance:AddListener(event_name.role_level_change, self.levelListener)
@@ -376,8 +375,8 @@ function MarketGoldPanel:UpdateMainButton()
 
     if catalg_1 ~= nil then
         mainBtn = self.btnObjList[catalg_1].transform:Find("MainButton").gameObject
-        mainBtn.transform:Find("Arrow1").gameObject:SetActive(false)
-        mainBtn.transform:Find("Arrow2").gameObject:SetActive(true)
+        mainBtn.transform:Find("Arrow1").gameObject:SetActive(false)  --向上
+        mainBtn.transform:Find("Arrow2").gameObject:SetActive(true)   -- 向下
         if catalg_1 ~= model.currentGoldMain then
             self.boolBarBtnOpenList[catalg_1] = false
         end
@@ -590,7 +589,7 @@ function MarketGoldPanel:OnBuy()
         local itemlist = model.goldItemList[model.currentGoldMain][model.currentGoldSub]
         for i,v in ipairs(itemlist) do
             if v.base_id == chosenId then
-                margin = v.margin
+                margin = v.margin    -- 服务器发来的数据
                 price = v.cur_price
                 break
             end
