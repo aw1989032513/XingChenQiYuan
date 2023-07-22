@@ -124,6 +124,7 @@ public class LuaSrvManager {
 
         GameContext ctx = GameContext.GetInstance ();
         string versionFile = ctx.ResourcesPath + "/version.json";
+        Debug.Log("版本文件是：" + versionFile);
         VersionReader versionReader = new VersionReader (true, versionFile);
         string module = "";
         try {
@@ -143,7 +144,7 @@ public class LuaSrvManager {
                 if (module.StartsWith ("base")) {
                     continue;
                 }
-                // Debug.Log(string.Format("初始化lua模块: {0}", module));
+                 Debug.Log(string.Format("初始化lua模块: {0}", module));
                 luaState.doString(string.Format ("require('{0}')", module));
             }
         } catch (Exception e) {

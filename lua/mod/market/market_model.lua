@@ -7,8 +7,11 @@ function MarketModel:__init()
     self.goldHistory = {}
     self.currentTab = nil       -- 当前标签页
     self.goldItemList = {}
-    self.paimaiBuyItemList = {}
+    self.paimaiBuyItemList = {}   -- 用于接受服务器传来的数据
+    self.paimaiSellItemList = {}   
     self.paimaiGongShiItemList = {}
+    self.paimaiPurchasedItemList = {}
+
     self.sliverItemList = {nil, nil, nil, nil, nil}     -- 根据类型
     self.sellCellList = {}
     self.sellItemDic = {}
@@ -36,6 +39,8 @@ function MarketModel:__init()
     self.currentPaiMaiMain = 1
     self.currentPaiMaiSub = 1
 
+    self.currentPaiMaiGongShiMain =1
+    self.currentPaiMaiGongShiSub = 1
 
     self.silverIdToClasses = {
         [23711] = 1,

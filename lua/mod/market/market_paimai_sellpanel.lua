@@ -9,6 +9,12 @@ function MarketPaiMaiSellPanel:__init(parent)
         , {file = AssetConfig.market_textures, type = AssetType.Dep}
     }
 
+
+    self.openListener = function() self:OnOpen() end
+    self.hideListener = function() self:OnHide() end
+    self.onReloadPaiMaiSellMarketListener = function() self:OnReloadMarketPaiMaiBuy() end
+    self.OnOpenEvent:Add(self.openListener)
+    self.OnHideEvent:Add(self.hideListener)
     
 end
 
@@ -25,6 +31,7 @@ function MarketPaiMaiSellPanel:InitPanel()
     self.SellCellObjList = {} 
     self.doSaveSellPosition = true -- 保存位置的
     self.isSellRefrshData = false
+    
     -- 初始化右边的SellShowPanel
 
     self.SellPanelContainer = self.gameObject.transform:Find("Sell_ShowPanel/mask/Scroll/Container")
@@ -74,6 +81,17 @@ function MarketPaiMaiSellPanel:InitPanel()
         self.SellCellObjList[i] = MarketPaiMaiSellItem.New(self.model, obj)
     end
 
+    
+    --空的
+   self.EmptyItem =  self.SellPanelContainer:Find("EmptyItem").gameObject:GetComponent(Button)
+   self.EmptyItem.onClick:AddListener(function()
+    NoticeManager.Instance:FloatTipsByString(TI18N("点击了空格子"))
+    if self.sellWin == nil then
+        self.sellWin = MarketPaiMaiSellSelectPanel.New(self)  --   MarketPaiMaiSellSelectPanel
+    end
+    self.sellWin:Show()
+   end
+)
 
     self.OnOpenEvent:Fire()
 end
@@ -85,10 +103,7 @@ function MarketPaiMaiSellPanel:__delete()
     end
     self.OnHideEvent:Fire()
     self.model.lastSelectObj = nil
-    if self.frozen ~= nil then
-        self.frozen:DeleteMe()
-        self.frozen = nil
-    end
+
     if self.boxYLayout ~= nil then
         self.boxYLayout:DeleteMe()
         self.boxYLayout = nil
@@ -97,13 +112,19 @@ function MarketPaiMaiSellPanel:__delete()
         self.gridPanel:DeleteMe()
         self.gridPanel = nil
     end
-    if self.cellObjectList ~= nil then
-        for k,v in pairs(self.cellObjectList) do
+    if self.SellCellObjList ~= nil then
+        for k,v in pairs(self.SellCellObjList) do
             v:DeleteMe()
         end
-        self.cellObjList = nil
+        self.SellCellObjList = nil
     end
-    self.setting_data = nil
+    if self.sellWin ~= nil then
+        self.sellWin:DeleteMe()
+        self.sellWin = nil
+    end
+
+
+    self.sellSetting_data = nil
     GameObject.DestroyImmediate(self.gameObject)
     self.OnOpenEvent:Remove(self.openListener)
     self.OnHideEvent:Remove(self.hideListener)
@@ -112,75 +133,96 @@ function MarketPaiMaiSellPanel:__delete()
     self.isUp = nil
     self:AssetClearAll()
 end
-
 function MarketPaiMaiSellPanel:OnOpen()
 
+    self:RemoveListeners()
+    EventMgr.Instance:AddListener(event_name.market_paimai_sell_update, self.onReloadPaiMaiSellMarketListener)  -- 数据的更新 
+
+
+    self:UpdateSellPanel()
+
+    NoticeManager.Instance:FloatTipsByString(TI18N("发送协议send12400001"))
+    --MarketManager.Instance:send12407()
 
 end
+
 
 function MarketPaiMaiSellPanel:OnHide()
     self:RemoveListeners()
     
-
-    MarketManager.Instance.onUpdateRed:Fire()
 end
+function MarketPaiMaiSellPanel:RemoveListeners()
+    MarketManager.Instance.onReloadPaiMaiSellMarket:RemoveListener(self.onReloadPaiMaiSellMarketListener)
+    --EventMgr.Instance:RemoveListener(event_name.world_lev_change, self.worldLevListener)
+    --EventMgr.Instance:RemoveListener(event_name.role_level_change, self.levelListener)
+    EventMgr.Instance:RemoveListener(event_name.market_paimai_sell_update, self.onReloadPaiMaiSellMarketListener)
+end
+
+
 -- 更新中间出售列表
 function MarketPaiMaiSellPanel:UpdateSellPanel()
     local model = self.parent.model
-    local catalg_1 = model.currentGoldMain
-    local catalg_2 = model.currentGoldSub
+    --local catalg_1 = model.currentGoldMain
+   -- local catalg_2 = model.currentGoldSub
     local roleData = RoleManager.Instance.RoleData
 
-    MarketManager.Instance.onUpdateRed:Fire()
-    MarketManager.Instance.redPointDic[1][catalg_1] = MarketManager.Instance.redPointDic[1][catalg_1] or {}
+   -- MarketManager.Instance.onUpdateRed:Fire()
+   -- MarketManager.Instance.redPointDic[1][catalg_1] = MarketManager.Instance.redPointDic[1][catalg_1] or {}
 
-    LuaTimer.Add(500, function()
-        MarketManager.Instance.redPointDic[1][catalg_1][catalg_2] = false
-    end)
+    -- LuaTimer.Add(500, function()
+    --     MarketManager.Instance.redPointDic[1][catalg_1][catalg_2] = false
+    -- end)
 
-    PlayerPrefs.SetInt(
-        BaseUtils.Key(roleData.id, roleData.platform, roleData.zone_id, MarketManager.Instance.marketLocalSave, catalg_1,
-            catalg_2), BaseUtils.BASE_TIME)
+  --  PlayerPrefs.SetInt(
+    --    BaseUtils.Key(roleData.id, roleData.platform, roleData.zone_id, MarketManager.Instance.marketLocalSave, catalg_1,
+       --     catalg_2), BaseUtils.BASE_TIME)
 
-    if catalg_2 == 0 then
-        catalg_2 = self.openCatalg2List[catalg_1]
-        model.currentGoldSub = catalg_2
-    end
+    -- if catalg_2 == 0 then
+    --     catalg_2 = self.openCatalg2List[catalg_1]
+    --     model.currentGoldSub = catalg_2
+    -- end
 
-    local itemList = model.goldItemList
-    itemList[catalg_1] = itemList[catalg_1] or {}
+    local itemList = model.paimaiSellItemList
+   -- itemList[catalg_1] = itemList[catalg_1] or {}
     -- if itemList[catalg_1][catalg_2] == nil then
     --     --return
     -- end
 
-    itemList = itemList[catalg_1][catalg_2] or {}
-    if model.targetBaseId ~= nil then
-        model.selectPos = nil
-        for i = 1, #itemList do
-            if itemList[i].base_id == model.targetBaseId then
-                model.selectPos = i
-                break
-            end
-        end
+    --itemList = itemList[catalg_1][catalg_2] or {}
+    -- if model.targetBaseId ~= nil then
+    --     model.selectPos = nil
+    --     for i = 1, #itemList do
+    --         if itemList[i].base_id == model.targetBaseId then
+    --             model.selectPos = i
+    --             break
+    --         end
+    --     end
 
-        if model.selectPos ~= nil then
-            model.lastPosition = (model.selectPos - 1) * 42
-            -- if self.buyPanelContainerRect.sizeDelta.y - model.lastPosition < 387 then
-            --     model.lastPosition = self.buyPanelContainerRect.sizeDelta.y - 387
-            -- end
-            if self.buyPanelContainerRect.sizeDelta.y > 387 then
-                if self.buyPanelContainerRect.sizeDelta.y - model.lastPosition < 387 then
-                    model.lastPosition = self.buyPanelContainerRect.sizeDelta.y - 387
-                end
-            else
-                model.lastPosition = 0
-            end
+    --     if model.selectPos ~= nil then
+    --         model.lastPosition = (model.selectPos - 1) * 42
+    --         -- if self.buyPanelContainerRect.sizeDelta.y - model.lastPosition < 387 then
+    --         --     model.lastPosition = self.buyPanelContainerRect.sizeDelta.y - 387
+    --         -- end
+    --         if self.sell.sizeDelta.y > 387 then
+    --             if self.SellPanelContainerRect.sizeDelta.y - model.lastPosition < 387 then
+    --                 model.lastPosition = self.SellPanelContainerRect.sizeDelta.y - 387
+    --             end
+    --         else
+    --             model.lastPosition = 0
+    --         end
 
-            model.goldChosenBaseId = model.targetBaseId
-        end
-    end
+    --         model.goldChosenBaseId = model.targetBaseId
+    --     end
+    -- end
 
-    self.sellSetting_data.data_list = itemList
+   -- 测试代码
+   local tempItemList = {}
+   local xiaoxiongsuipian={base_id = 28612,cur_price = 6000,time = 3600,zhuangtai = 0}
+   table.insert(tempItemList,xiaoxiongsuipian)
+   self.sellSetting_data.data_list = tempItemList
+
+  --测试代码
+    --self.sellSetting_data.data_list = itemList
     BaseUtils.refresh_circular_list(self.sellSetting_data) --这个地方会更新item的数据,调用update_my_self方法
 
     self.doSaveSellPosition = false
@@ -191,6 +233,21 @@ function MarketPaiMaiSellPanel:UpdateSellPanel()
 
     self.isSellRefrshData = false
 end
+
 function MarketPaiMaiSellPanel:RoleAssetsListener()
     
+end
+function MarketPaiMaiSellPanel:CloseSell()
+    if self.sellWin ~= nil then
+        self.sellWin:DeleteMe()
+        self.sellWin = nil
+    end
+end
+
+function MarketPaiMaiSellPanel:OnReloadMarketPaiMaiBuy()
+    -- local model = self.model
+    -- model.goldChosenBaseId = nil
+    -- model.selectPos = nil
+    -- model.lastSelectObj = nil
+    self:UpdateBuyPanel()
 end

@@ -25,7 +25,7 @@ end
 -- {name = "开发服", host = "192.168.1.101", port = 8001, platform = "dev", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "1", isnew = "0", hot = "1", roles = {}} ,
 ServerConfig.servers = {
      {name = "1区:王者归来", host = "101.35.239.249", port = 8100, platform = "local", zone_id = 100, begin_time = 1611896400, end_time = 0, first_zone = "0", recomed = "0", isnew = "1", hot = "1", roles = {}},
-     {name = "本机", host = "192.168.5.2", port = 8001, platform = "local", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
+    
     --{name = "开发服", host = "192.168.1.101", port = 8001, platform = "dev", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "1", isnew = "0", hot = "1", roles = {}} ,
     --{name = "本机11", host = "127.0.0.1", port = 8011, platform = "local", zone_id = 11, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
     --{name = "新测试服", host = "103.36.167.168", port = 8500, platform = "local", zone_id = 500, begin_time = 1674109712, end_time = 0, first_zone = "0", recomed = "0", isnew = "0", hot = "1", roles = {}},
@@ -103,7 +103,7 @@ ServerConfig.servers = {
     -- {name = "广哥VM2", host = "192.168.1.202", port = 8002, platform = "local", zone_id = 2, begin_time = 1351527200, end_time = 1651613600, first_zone = "0", recomed = "0", isnew = "0", hot = "0", roles = {}},
     -- {name = "广哥VM3", host = "192.168.1.202", port = 8003, platform = "local", zone_id = 3, begin_time = 1351527200, end_time = 1651613600, first_zone = "0", recomed = "0", isnew = "0", hot = "0", roles = {}},
     -- {name = "文龙VM", host = "192.168.1.103", port = 8001, platform = "local", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "0", recomed = "0", isnew = "0", hot = "0", roles = {}},
-    -- {name = "本机", host = "127.0.0.1", port = 8001, platform = "local", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
+     {name = "本机", host = "127.0.0.1", port = 8001, platform = "local", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
     -- {name = "本机2", host = "127.0.0.1", port = 8002, platform = "local", zone_id = 2, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
     -- {name = "本机3", host = "127.0.0.1", port = 8003, platform = "local", zone_id = 3, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
     -- {name = "本机4", host = "127.0.0.1", port = 8004, platform = "local", zone_id = 4, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},

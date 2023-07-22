@@ -1,0 +1,14 @@
+DataCampExchange = DataCampExchange or {}
+
+--周年庆兑换活动
+DataCampExchange.data_camp_exchange_reward_length = 8
+DataCampExchange.data_camp_exchange_reward = {
+	[1] = {lev = 1, id = 1, item_list = {{20770,0,1,0},{22216,0,1,0},{20025,0,2,0}}, item_gift_name = "冒险提升礼包", item_gift_id = 29609, cost = 520, max = 4, min_day = 0, max_day = 3, camp_max = 4, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[2] = {lev = 1, id = 2, item_list = {{20770,0,1,0},{20616,0,1,0},{20545,0,1,0},{20006,0,10,0}}, item_gift_name = "萌宠护符礼包", item_gift_id = 29605, cost = 1380, max = 3, min_day = 0, max_day = 3, camp_max = 3, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[3] = {lev = 1, id = 3, item_list = {{23740,0,1,0},{20770,0,1,0},{22585,0,1,0},{23752,0,1,0}}, item_gift_name = "精灵珍宝礼包", item_gift_id = 29602, cost = 1780, max = 3, min_day = 0, max_day = 3, camp_max = 3, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[4] = {lev = 1, id = 4, item_list = {{22447,0,1,0},{20053,0,1,0},{20755,0,1,0},{20770,0,1,0}}, item_gift_name = "红桃珍宝礼包", item_gift_id = 29603, cost = 3280, max = 3, min_day = 0, max_day = 3, camp_max = 3, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[5] = {lev = 1, id = 5, item_list = {{20617,0,1,0},{20076,0,1,0},{22617,0,1,0},{20770,0,1,0}}, item_gift_name = "珍品护符礼包", item_gift_id = 29614, cost = 6580, max = 3, min_day = 0, max_day = 3, camp_max = 3, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[6] = {lev = 1, id = 6, item_list = {{21245,0,1,0},{21244,0,2,0},{23733,0,20,0},{20770,0,2,0}}, item_gift_name = "极品宠物礼包", item_gift_id = 29604, cost = 12800, max = 3, min_day = 0, max_day = 3, camp_max = 3, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 89, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[7] = {lev = 1, id = 7, item_list = {{21257,0,1,0},{21256,0,2,0},{23733,0,20,0},{20770,0,2,0}}, item_gift_name = "极品宝物礼包", item_gift_id = 29604, cost = 14800, max = 3, min_day = 0, max_day = 3, camp_max = 3, pre_id = 0, pre_num = 0, min_lev = 90, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1},
+	[8] = {lev = 1, id = 8, item_list = {{20638,0,1,0},{29101,0,2,0},{23119,0,1,0},{20770,0,2,0}}, item_gift_name = "神级宠物礼包", item_gift_id = 29611, cost = 16800, max = 2, min_day = 0, max_day = 3, camp_max = 2, pre_id = 0, pre_num = 0, min_lev = 1, max_lev = 200, sex = 2, classes = 0, min_lev_break = 0, max_lev_break = 1}
+}

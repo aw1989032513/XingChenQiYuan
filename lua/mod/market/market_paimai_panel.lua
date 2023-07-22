@@ -14,6 +14,7 @@ function MarketPaiMaiPanel:__init(parent)
     self.tabList = {{index = 1},{index = 2 },{index = 3},{index = 4}}
 
     --self.updateRedPoint = self.redListener
+   
 
     self.openListener = function() self:OnOpen() end
     self.hideListener = function() self:OnHide() end
@@ -222,8 +223,17 @@ function MarketPaiMaiPanel:TurnPage(index)
     self.lastIndex = currentIndex
     panel:Show()
     self.model.currentSub = 1
-end
 
+
+end
+function MarketPaiMaiPanel:RefreshBtnPageTabList()
+    for j = 1, 4 do
+        self.btnPageTabList[j].gameObject:GetComponent(Image).sprite = PreloadManager.Instance:GetSprite(
+            AssetConfig.base_textures, "DefaultButton5")
+    end
+    self.btnPageTabList[self.lastIndex].gameObject:GetComponent(Image).sprite = PreloadManager.Instance:GetSprite(
+        AssetConfig.base_textures, "DefaultButton7")
+end
 function MarketPaiMaiPanel:__delete()
     self.OnHideEvent:Fire()
     self.subPanel = nil
@@ -240,11 +250,14 @@ function MarketPaiMaiPanel:__delete()
         GameObject.DestroyImmediate(self.gameObject)
         self.gameObject = nil
     end
+   
     self:AssetClearAll()
 end
 
 function MarketPaiMaiPanel:OnOpen()
     self:TurnPage(1)
+    --刷新Toggle
+    self:RefreshBtnPageTabList()
 end
 
 function  MarketPaiMaiPanel:RemoveListeners()
@@ -259,5 +272,5 @@ end
 function MarketPaiMaiPanel:OnHide()
     self:RemoveListeners()
 
-    self.subPanelList[self.lastIndex]:Hiden()
+    self.subPanelList[self.lastIndex]:Hiden() 
 end

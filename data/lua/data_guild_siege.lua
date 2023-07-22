@@ -1,0 +1,63 @@
+DataGuildSiege = DataGuildSiege or {}
+
+DataGuildSiege.data_castle_length = 50
+DataGuildSiege.data_castle = {
+	[1] = {id = 1, type = 3, x = 609, y = 186, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "进攻胜利后，公会可获得<color='#ffff00'>双倍星数</color>，即最高可获得6星", need_check = {}},
+	[8] = {id = 8, type = 0, x = 490, y = 193, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[9] = {id = 9, type = 0, x = 385, y = 219, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[10] = {id = 10, type = 0, x = 294, y = 254, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[11] = {id = 11, type = 0, x = 225, y = 390, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[12] = {id = 12, type = 0, x = 366, y = 365, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[13] = {id = 13, type = 0, x = 500, y = 422, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "2号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {2}},
+	[2] = {id = 2, type = 2, x = 611, y = 376, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "被<color='#ffff00'>3星摧毁</color>后才能进攻<color='#ffff00'>13号</color>、<color='#ffff00'>14号</color>城堡", need_check = {}},
+	[14] = {id = 14, type = 0, x = 736, y = 443, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "2号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {2}},
+	[3] = {id = 3, type = 1, x = 808, y = 632, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "被<color='#ffff00'>3星摧毁</color>后，公会<color='#ffff00'>所有建筑防守设置</color>公开", need_check = {}},
+	[15] = {id = 15, type = 0, x = 630, y = 745, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[16] = {id = 16, type = 0, x = 590, y = 614, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[17] = {id = 17, type = 0, x = 450, y = 606, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[18] = {id = 18, type = 0, x = 359, y = 658, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[4] = {id = 4, type = 3, x = 228, y = 695, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "进攻胜利后，公会可获得<color='#ffff00'>双倍星数</color>，即最高可获得6星", need_check = {}},
+	[19] = {id = 19, type = 0, x = 475, y = 829, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[20] = {id = 20, type = 0, x = 333, y = 966, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[21] = {id = 21, type = 0, x = 494, y = 994, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "5号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {5}},
+	[5] = {id = 5, type = 2, x = 635, y = 975, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "被<color='#ffff00'>3星摧毁</color>后才能进攻<color='#ffff00'>21号</color>、<color='#ffff00'>22号</color>城堡", need_check = {}},
+	[22] = {id = 22, type = 0, x = 769, y = 1029, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "5号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {5}},
+	[23] = {id = 23, type = 0, x = 722, y = 1175, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[24] = {id = 24, type = 0, x = 604, y = 1168, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[25] = {id = 25, type = 0, x = 493, y = 1139, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[26] = {id = 26, type = 0, x = 363, y = 1145, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[27] = {id = 27, type = 0, x = 318, y = 1292, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[28] = {id = 28, type = 0, x = 480, y = 1346, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[29] = {id = 29, type = 0, x = 612, y = 1324, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[30] = {id = 30, type = 0, x = 732, y = 1358, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[31] = {id = 31, type = 0, x = 642, y = 1462, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[32] = {id = 32, type = 0, x = 806, y = 1561, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[33] = {id = 33, type = 0, x = 641, y = 1670, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[34] = {id = 34, type = 0, x = 537, y = 1587, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "6号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {6}},
+	[6] = {id = 6, type = 2, x = 432, y = 1544, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "被<color='#ffff00'>3星摧毁</color>后才能进攻<color='#ffff00'>34号</color>、<color='#ffff00'>35号</color>城堡", need_check = {}},
+	[35] = {id = 35, type = 0, x = 331, y = 1597, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "6号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {6}},
+	[36] = {id = 36, type = 0, x = 210, y = 1631, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[37] = {id = 37, type = 0, x = 470, y = 1739, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[38] = {id = 38, type = 0, x = 345, y = 1872, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[39] = {id = 39, type = 0, x = 498, y = 1912, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[40] = {id = 40, type = 0, x = 631, y = 1898, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[41] = {id = 41, type = 0, x = 768, y = 1946, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[42] = {id = 42, type = 0, x = 734, y = 2098, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[43] = {id = 43, type = 0, x = 605, y = 2089, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[44] = {id = 44, type = 0, x = 493, y = 2096, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[45] = {id = 45, type = 0, x = 364, y = 2060, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[46] = {id = 46, type = 0, x = 349, y = 2229, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "7号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {7}},
+	[7] = {id = 7, type = 2, x = 502, y = 2278, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "被<color='#ffff00'>3星摧毁后</color>才能进攻<color='#ffff00'>46号</color>、<color='#ffff00'>47号</color>城堡", need_check = {}},
+	[47] = {id = 47, type = 0, x = 701, y = 2306, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "7号<color='#ffff00'>保护塔</color>被<color='#ffff00'>3星摧毁</color>后，才能对本城堡发起进攻", need_check = {7}},
+	[48] = {id = 48, type = 0, x = 809, y = 2501, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[49] = {id = 49, type = 0, x = 604, y = 2573, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}},
+	[50] = {id = 50, type = 0, x = 425, y = 2517, first_reward = {{90036,10}}, second_reward = {{90036,12}}, final_reward = {{90036,15}}, desc = "", need_check = {}}
+}
+
+DataGuildSiege.data_castle_desc_length = 4
+DataGuildSiege.data_castle_desc = {
+	[0] = {type = 0, desc = "攻城战的基础建筑，完美摧毁可获得<color='#ffff00'>3星</color>"},
+	[3] = {type = 3, desc = "镇守公会核心地带，完美摧毁后可获得<color='#ffff00'>双倍星数</color>，即<color='#ffff00'>6星</color>"},
+	[1] = {type = 1, desc = "<color='#ffff00'>3星摧毁</color>敌方公会的瞭望塔，敌方所有防守阵容将暴露"},
+	[2] = {type = 2, desc = "必须<color='#ffff00'>3星摧毁</color>保护塔才能进攻<color='#ffff00'>相邻</color>的城堡"}
+}

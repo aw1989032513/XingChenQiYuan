@@ -1,0 +1,1 @@
+DataCampLuckyDraw = DataCampLuckyDraw or {}

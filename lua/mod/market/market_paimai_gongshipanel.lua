@@ -24,15 +24,15 @@ function MarketPaiMaiGongShiPanel:__init(parent)
 
     self.frozen = nil
 
-    self.redListener = function() self:CheckRed() end
-    self.levelListener = function() self:CheckOpen() end
-    self.worldLevListener = function() self:CheckOpen() end
+    --self.redListener = function() self:CheckRed() end
+    --self.levelListener = function() self:CheckOpen() end
+    --self.worldLevListener = function() self:CheckOpen() end
 
-    self.updateRedPoint = self.redListener
+    --self.updateRedPoint = self.redListener
 
     self.openListener = function() self:OnOpen() end
     self.hideListener = function() self:OnHide() end
-    self.onReloadGoldMarketListener = function() self:OnReloadMarketGold() end
+    self.onReloadPaiMaiGongShiMarketListener = function() self:OnReloadMarketPaiMaiGongShi() end
     self.OnOpenEvent:Add(self.openListener)
     self.OnHideEvent:Add(self.hideListener)
     self.timerId = nil
@@ -40,7 +40,7 @@ end
 
 function MarketPaiMaiGongShiPanel:InitPanel()
     self.gameObject = GameObject.Instantiate(self:GetPrefab(AssetConfig.market_paimai_gongshi_panel))
-    self.gameObject.name = "PaiMaiGongshiPanel"
+    self.gameObject.name = "公示面板"
     self.gameObject:SetActive(true)
 
     self.gameObject.transform:SetParent(self.parent.gameObject.transform:Find("Panel"))
@@ -55,79 +55,86 @@ function MarketPaiMaiGongShiPanel:InitPanel()
 
   
     self.subIndex = {}
-    --  需要更改的读表
-    local tabs =  DataMarketGold.data_market_gold_tab-- 11 根据DataMarketTbank.data_market_tbank_category  这个表配置
-    for i = 1, DataMarketGold.data_market_gold_tab_length do   --DataMarketTbank.data_market_tbank_category_length
-        if self.subIndex[tabs[i].catalg_1] == nil then
-            self.subIndex[tabs[i].catalg_1] = {}
-        end
 
-        if tabs[i].world_lev <= role_info.world_lev then
-            table.insert(self.subIndex[tabs[i].catalg_1], tabs[i].catalg_2)
+    --主按钮列表数量
+    local tabs = DataMarketTbank.data_market_tbank_category
+    for i = 1, DataMarketTbank.data_market_tbank_category_length do   --DataMarketTbank.data_market_tbank_category_length
+        if self.subIndex[tabs[i].catid] == nil then
+            self.subIndex[tabs[i].catid] = {}
         end
+        table.insert(self.subIndex[tabs[i].catid], tabs[i].catname)
     end
+    
 
-    --按钮列表数量
-    local btnList = DataMarketGold.data_market_gold_tab  --DataMarketTbank.data_market_tbank_category
+    local btnList = DataMarketTbank.data_market_tbank_category  --DataMarketTbank.data_market_tbank_category   -- 有23个
     local btnContainer = self.BuyPanel.transform:Find("Bar/mask/Container")
     local btnTemplate = btnContainer:Find("Button").gameObject
     btnTemplate:SetActive(false)
     local subbtnTemplate = btnContainer:Find("SubButton").gameObject -- 次级列表
     subbtnTemplate:SetActive(false)
 
+    local subbtnList = DataMarketTbank.data_market_tbank_subcategory
+    
     local item = nil
-    for _, v in pairs(btnList) do
+    for k, v in ipairs(btnList) do   -- 遍历11个
         -- if v.world_lev <= role_info.world_lev then
-        item = self.btnObjList[v.catalg_1]
-        self.boolBarBtnOpenList[v.catalg_1] = false
+        item = self.btnObjList[v.catid]
+        self.boolBarBtnOpenList[v.catid] = false
         if item == nil then
-            self.btnObjList[v.catalg_1] = GameObject.Instantiate(btnTemplate)
-            item = self.btnObjList[v.catalg_1]
+            self.btnObjList[v.catid] = GameObject.Instantiate(btnTemplate)
+            item = self.btnObjList[v.catid]
             item.transform:SetParent(btnContainer)
             item.transform.localScale = Vector3.one
-            item.name = "Btn" .. v.catalg_1
-            self.subbtnList[v.catalg_1] = {}
+            item.name = "Btn" .. v.catid
+            self.subbtnList[v.catid] = {}
 
-            self.openCatalg2List[v.catalg_1] = v.catalg_2
+           -- self.openCatalg2List[v.catid] = v.catalg_2
             -- 左侧列表的主按钮
-            item.transform:Find("MainButton"):GetComponent(Button).onClick:AddListener(function()
-                model.lastGoldMain = model.currentGoldMain
-                model.currentGoldMain = v.catalg_1
-                if model.lastGoldMain ~= model.currentGoldMain then
-                    model.currentGoldSub = self.subIndex[model.currentGoldMain][1]
-                    model.goldChosenBaseId = nil
-                    model.selectPos = nil
-                end
-                model.targetBaseId = nil
-                self:UpdateMainButton() -- 更新按钮状态和箭头，高亮图片
-                self:UpdateSubButton()  -- 点击的时候，更新次级列表
-                self:ReloadBuyPanel()
-            end)
-            item.transform:Find("MainButton/Text"):GetComponent(Text).text = v.catalg_1_name
-            item.transform:Find("MainButton/Image"):GetComponent(Image).sprite = self.assetWrapper:GetSprite(
-                AssetConfig.market_textures, v.icon)
+             item.transform:Find("MainButton"):GetComponent(Button).onClick:AddListener(function()
+                 model.lastPaiMaiMain = model.currentPaiMaiGongShiMain   --1
+                 model.currentPaiMaiGongShiMain = v.catid
+                 if model.lastPaiMaiMain ~= model.currentPaiMaiGongShiMain then
+                     model.currentPaiMaiGongShiSub = 1
+                     model.goldChosenBaseId = nil
+                     model.selectPos = nil
+                 end
+                 model.targetBaseId = nil
+                 self:UpdateMainButton() -- 更新按钮状态和箭头，高亮图片
+                 self:UpdateSubButton()  -- 点击的时候，更新次级列表
+                 self:ReloadBuyPanel()
+             end)
+            item.transform:Find("MainButton/Text"):GetComponent(Text).text = v.catname
         end
         -- 左侧列表按钮的次要列表按钮
-        local subbtnList = self.subbtnList[v.catalg_1]
-        subbtnList[v.catalg_2] = GameObject.Instantiate(subbtnTemplate)
-        local subbtn = subbtnList[v.catalg_2]
-        subbtn.transform:SetParent(item.transform)
-        subbtn.transform.localScale = Vector3.one
-        subbtn.name = "sub_" .. v.catalg_1 .. "_" .. v.catalg_2
-        subbtn:GetComponent(Button).onClick:AddListener(function()
-            model.lastGoldSub = model.currentGoldSub
-            model.currentGoldSub = v.catalg_2
-            model.targetBaseId = nil
-            model.goldChosenBaseId = nil
-            model.selectPos = nil
-            model.lastPosition = 0
-            self:UpdateSubButton()
-            self:ReloadBuyPanel()
-        end)
-        subbtn.transform:Find("Text"):GetComponent(Text).text = v.catalg_2_name
-
+     
+      for i, j in pairs(subbtnList) do 
+        for s, t in ipairs(j) do
+            if i == k then
+                --local tempsubbtnList ={}
+                --tempsubbtnList[i]= GameObject.Instantiate(subbtnTemplate)
+                local tempsubbtnList = self.subbtnList[v.catid]
+                tempsubbtnList[s]= GameObject.Instantiate(subbtnTemplate)
+                local subbtn = tempsubbtnList[s]
+                subbtn.transform:SetParent(item.transform)   --btn1
+                subbtn.transform.localScale = Vector3.one
+                subbtn.name = "sub_" .. i  .."_" .. s
+                subbtn:GetComponent(Button).onClick:AddListener(function()
+                     model.lastGoldSub = model.currentPaiMaiGongShiSub
+                     model.currentPaiMaiGongShiSub = s
+                     model.targetBaseId = nil
+                     model.goldChosenBaseId = nil
+                     model.selectPos = nil
+                     model.lastPosition = 0
+                     self:UpdateSubButton()
+                     self:ReloadBuyPanel()
+                 end)
+                
+                subbtn.transform:Find("Text"):GetComponent(Text).text = t.subname
+            end
+        end
+      end
         item:SetActive(true)
-        -- end
+        
     end
 
     -- 初始化右边的BuyShowPanel
@@ -178,74 +185,102 @@ function MarketPaiMaiGongShiPanel:InitPanel()
         self.cellObjList[i] = MarketPaiMaiGongShiItem.New(self.model, obj)
     end
 
-
-     self:InitBuyPanel()
-
-     --self:UpdateMainButton()
-     --self:UpdateSubButton()
-     --self:ReloadBuyPanel()
-
-     self.OnOpenEvent:Fire()
+     --self:InitBuyPanel()
+     self:UpdateMainButton()
+     self:UpdateSubButton()
+     self:ReloadBuyPanel()
+   
+    self.OnOpenEvent:Fire()
 end
+-- function MarketPaiMaiGongShiPanel:InitBuyPanel()
 
-function MarketPaiMaiGongShiPanel:InitBuyPanel()
-  
-    self.BuyPanelBottom = self.BuyPanel.transform:Find("Bottom")
-    --Notice 按钮
-    self.noticeBtn = self.BuyPanelBottom.transform:Find("Notice"):GetComponent(Button)
-    self.noticeBtn.onClick:AddListener(function() self:OnNotice() end)
-    -- 竞价按钮
-    self.buyButton = self.BuyPanelBottom.transform:Find("BuyButton"):GetComponent(CustomButton)
-    self.buyButton.onClick:AddListener(function() self:OnBuy() end)
-    ---  小键盘设置
-    self.numberpadSetting = { -- 弹出小键盘的设置
-        gameObject = self.buyButton.gameObject,
-        min_result = 1,
-        max_by_asset = 20,
-        max_result = 20,
-        textObject = nil,
-        show_num = false,
-        returnKeep = true,
-        funcReturn = function(num)
-            model.goldBuyNum = num
-            if self.frozen.enabled == true then
-                self:OnBuy()
-            end
-            model.goldBuyNum = 1
-        end,
-        callback = nil,
-        show_num = true,
-        returnText = TI18N("竞价"),
-    }
+--     self.BuyPanelBottom = self.BuyPanel.transform:Find("Bottom")
+--     --Notice 按钮
+--     self.noticeBtn = self.BuyPanelBottom.transform:Find("Notice"):GetComponent(Button)
+--     self.noticeBtn.onClick:AddListener(function() self:OnNotice() end)
+--     -- 竞价按钮
+--     self.buyButton = self.BuyPanelBottom.transform:Find("BuyButton"):GetComponent(CustomButton)
+--     self.buyButton.onClick:AddListener(function() self:OnBuy() end)
+--     self.frozen = FrozenButton.New(self.buyButton.gameObject, {})
+--     self.buyButton.onHold:AddListener(function() self:OnNumberpad() end)
+
+--     --资产
+--     local role_assets = RoleManager.Instance.RoleData
+--     self.assetGoldText = self.BuyPanelBottom:Find("Image/GoldVal"):GetComponent(Text)
+--     self.assetGoldText.color = Color(232/255, 250/255, 255/255, 1)
+--     self.assetGoldText.text = tostring(role_assets.gold_bind)
+--     ---  小键盘设置
+--     self.numberpadSetting = { -- 弹出小键盘的设置
+--         gameObject = self.buyButton.gameObject,
+--         min_result = 1,
+--         max_by_asset = 20,
+--         max_result = 20,
+--         textObject = nil,
+--         show_num = false,
+--         returnKeep = true,
+--         funcReturn = function(num)
+--             model.goldBuyNum = num
+--             if self.frozen.enabled == true then
+--                 self:OnBuy()
+--             end
+--             model.goldBuyNum = 1
+--         end,
+--         callback = nil,
+--         show_num = true,
+--         returnText = TI18N("竞价"),
+--     }
     
 
-    -- 加号 增加金币，直接打开充值界面
-    self.addGoldButton = self.BuyPanelBottom.transform:Find("Image/AddGoldBtn"):GetComponent(Button)
-    self.addGoldButton.onClick:AddListener(function() WindowManager.Instance:OpenWindowById(
-        WindowConfig.WinID.recharge_explain, 1) end)
-end
+--     -- 加号 增加金币，直接打开充值界面
+--     self.addGoldButton = self.BuyPanelBottom.transform:Find("Image/AddGoldBtn"):GetComponent(Button)
+--     self.addGoldButton.onClick:AddListener(function() WindowManager.Instance:OpenWindowById(
+--         WindowConfig.WinID.recharge_explain, 1) end)
+-- end
 
-function MarketPaiMaiGongShiPanel:OnNotice()
-    -- 这里弹出来一个面板，里面一堆话
-    TipsManager.Instance:ShowText({
-        gameObject = self.noticeBtn.gameObject,
-        itemData = {
-            TI18N("1.可找回<color='#00ff00'>2天</color>内未参加活动的奖励"),
-            TI18N(
-            "2.可选择<color='#ffff00'>完美找回</color>和<color='#ffff00'>普通找回</color>两种方式。<color='#ffff00'>完美找回</color>可找回<color='#00ff00'>100%</color>的奖励；<color='#ffff00'>普通找回</color>可找回<color='#00ff00'>60%</color>的奖励"),
-            TI18N("3.人物等级高于世界等级<color='#00ff00'>7级及以上</color>时，无法找回<color='#ffff00'>经验</color>奖励")
-        }
-    })
+-- function MarketPaiMaiGongShiPanel:OnNotice()
+--     -- 这里弹出来一个面板，里面一堆话
+--     TipsManager.Instance:ShowText({
+--         gameObject = self.noticeBtn.gameObject,
+--         itemData = {
+--             TI18N("1.可找回<color='#00ff00'>2天</color>内未参加活动的奖励"),
+--             TI18N(
+--             "2.可选择<color='#ffff00'>完美找回</color>和<color='#ffff00'>普通找回</color>两种方式。<color='#ffff00'>完美找回</color>可找回<color='#00ff00'>100%</color>的奖励；<color='#ffff00'>普通找回</color>可找回<color='#00ff00'>60%</color>的奖励"),
+--             TI18N("3.人物等级高于世界等级<color='#00ff00'>7级及以上</color>时，无法找回<color='#ffff00'>经验</color>奖励")
+--         }
+--     })
+-- end
+function MarketPaiMaiGongShiPanel:OnNumberpad()
+    local model = self.model
+    if model.goldChosenBaseId == nil then
+        NoticeManager.Instance:FloatTipsByString(TI18N("请选择需要购买的物品"))
+    else
+        local maxValue = DataItem.data_get[model.goldChosenBaseId].overlap
+        if maxValue > 20 then
+            maxValue = 20
+        end
+        self.numberpadSetting.max_result = maxValue
+        NumberpadManager.Instance:set_data(self.numberpadSetting)
+    end
 end
-
 function MarketPaiMaiGongShiPanel:OnBuy()
     local model = self.model
     local chosenId = model.goldChosenBaseId
     local margin = 0
     local price = 0
 
+    -- model.paimaiBuyItemList 会通过服务器发来的数据赋值
     model.lastPosition = self.buyPanelContainerRect.anchoredPosition.y
-    if chosenId ~= nil and model.goldItemList[model.currentGoldMain] ~= nil and model.goldItemList[model.currentGoldMain][model.currentGoldSub] ~= nil then
+    if chosenId ~= nil and model.paimaiBuyItemList[model.currentPaiMaiGongShiMain] ~= nil and model.paimaiBuyItemList[model.currentPaiMaiGongShiMain][model.currentPaiMaiGongShiSub] ~= nil then
+        self.isRefrshData = true
+        for i,v in ipairs(itemlist) do
+            if v.base_id == chosenId then
+                margin = v.margin
+                price = v.cur_price
+                break
+            end
+        end
+
+
         -- 弹出小键盘
         self.numberpadSetting.max_result = maxValue
         NumberpadManager.Instance:set_data(self.numberpadSetting)
@@ -258,86 +293,68 @@ end
 -- -- 更新按钮状态和箭头，高亮图片
 function MarketPaiMaiGongShiPanel:UpdateMainButton()
     local model = self.parent.model
-    local catalg_1 = model.lastGoldMain
+    local catid = model.lastPaiMaiMain  -- 主按钮
     local mainBtn = nil
-    local arrow1 = nil
-    local arrow2 = nil
-    local subbtn = nil
 
-    if catalg_2 == 0 then
-        catalg_2 = self.openCatalg2List[catalg_1]
-    end
-
-    if catalg_1 ~= nil then
-        mainBtn = self.btnObjList[catalg_1].transform:Find("MainButton").gameObject
+    if catid ~= nil then
+        mainBtn = self.btnObjList[catid].transform:Find("MainButton").gameObject
         mainBtn.transform:Find("Arrow1").gameObject:SetActive(false)
         mainBtn.transform:Find("Arrow2").gameObject:SetActive(true)
-        if catalg_1 ~= model.currentGoldMain then
-            self.boolBarBtnOpenList[catalg_1] = false
+        if catid ~= model.currentPaiMaiGongShiMain then
+            self.boolBarBtnOpenList[catid] = false
         end
     else
-        mainBtn = self.btnObjList[model.currentGoldMain].transform:Find("MainButton").gameObject
+        mainBtn = self.btnObjList[model.currentPaiMaiGongShiMain].transform:Find("MainButton").gameObject
         mainBtn.transform:Find("Arrow1").gameObject:SetActive(true)
         mainBtn.transform:Find("Arrow2").gameObject:SetActive(false)
-        self.boolBarBtnOpenList[model.currentGoldMain] = false
+        self.boolBarBtnOpenList[model.currentPaiMaiGongShiMain] = false
     end
-    catalg_1 = model.currentGoldMain
-    self.boolBarBtnOpenList[catalg_1] = not self.boolBarBtnOpenList[catalg_1]
-    mainBtn = self.btnObjList[catalg_1].transform:Find("MainButton").gameObject
-    mainBtn.transform:Find("Arrow1").gameObject:SetActive(self.boolBarBtnOpenList[catalg_1])
-    mainBtn.transform:Find("Arrow2").gameObject:SetActive(not self.boolBarBtnOpenList[catalg_1])
+    catid = model.currentPaiMaiGongShiMain    -- 第一个主按钮
+    self.boolBarBtnOpenList[catid] = not self.boolBarBtnOpenList[catid]
+    mainBtn = self.btnObjList[catid].transform:Find("MainButton").gameObject
+    mainBtn.transform:Find("Arrow1").gameObject:SetActive(self.boolBarBtnOpenList[catid])
+    mainBtn.transform:Find("Arrow2").gameObject:SetActive(not self.boolBarBtnOpenList[catid])
 
     for k, v in pairs(self.btnObjList) do
         local image = v.transform:Find("MainButton/Bg"):GetComponent(Image)
         image.sprite = PreloadManager.Instance:GetSprite(AssetConfig.base_textures, "DefaultButton8")
         v.transform:Find("MainButton/Text"):GetComponent(Text).color = ColorHelper.DefaultButton8
-        local red = false
-        if MarketManager.Instance.redPointDic[1][k] ~= nil then
-            for _, v in pairs(MarketManager.Instance.redPointDic[1][k]) do
-                red = red or (v == true)
-            end
-        end
-        v.transform:Find("MainButton/NotifyPoint").gameObject:SetActive(red)
     end
     --DefaultButton9 是高亮的图片
-    if self.boolBarBtnOpenList[catalg_1] == true then
-        self.btnObjList[catalg_1].transform:Find("MainButton/Bg"):GetComponent(Image).sprite = PreloadManager.Instance
+    if self.boolBarBtnOpenList[catid] == true then
+        self.btnObjList[catid].transform:Find("MainButton/Bg"):GetComponent(Image).sprite = PreloadManager.Instance
             :GetSprite(AssetConfig.base_textures, "DefaultButton9")
-        self.btnObjList[catalg_1].transform:Find("MainButton/Text"):GetComponent(Text).color = ColorHelper
+        self.btnObjList[catid].transform:Find("MainButton/Text"):GetComponent(Text).color = ColorHelper
             .DefaultButton9
     end
 end
 
--- 刷新次列表
+-- 刷新次列表isRefrshDataO
 function MarketPaiMaiGongShiPanel:UpdateSubButton()
     local model = self.parent.model
-    local catalg_1 = model.currentGoldMain --这个代表打开了哪个主按钮
-    local catalg_2 = model.currentGoldSub  --这个玩意代表下表，用来次列表来显示高亮的
+    local catid = model.currentPaiMaiGongShiMain --这个代表打开了哪个主按钮
+    local catalg_2 = model.currentPaiMaiGongShiSub  --这个玩意代表下表，用来次列表来显示高亮的
     if catalg_2 == 0 then
-        catalg_2 = self.openCatalg2List[catalg_1]
+        catalg_2 = self.openCatalg2List[catid]
     end
-    local subbtnList = self.subbtnList[catalg_1]
+    local subbtnList = self.subbtnList[catid]
 
     local count = 0
-    for k, v in pairs(subbtnList) do
+    for k, v in ipairs(subbtnList) do
         if v ~= nil then
             count = count + 1
         end
     end
-    for k, _ in pairs(self.btnObjList) do
-        for _, v in pairs(self.subbtnList[k]) do
-            -- v:SetActive(self.boolBarBtnOpenList[k])
-            v:SetActive(false)
+    for k, _ in ipairs(self.btnObjList) do
+        for _, v in ipairs(self.subbtnList[k]) do
+            v:SetActive(false) 
         end
     end
 
-    local arrow1 = self.btnObjList[catalg_1].transform:Find("MainButton/Arrow1")
-
-    if count > 1 then
-        MarketManager.Instance.redPointDic[1][catalg_1] = MarketManager.Instance.redPointDic[1][catalg_1] or {}
-        for k, v in pairs(subbtnList) do
-            v:SetActive(self.boolBarBtnOpenList[catalg_1] and model.goldOpenTab[catalg_1][k])
-            -- v:SetActive(true)
+    if count >= 1 then
+        --MarketManager.Instance.redPointDic[1][catid] = MarketManager.Instance.redPointDic[1][catid] or {}
+        for k, v in ipairs(subbtnList) do
+            v:SetActive(self.boolBarBtnOpenList[catid] and true)  --and model.paimaiOpenTab[catid][k]
             if k == catalg_2 then
                 v.transform:Find("Select").gameObject:SetActive(true)
                 v.transform:Find("Text"):GetComponent(Text).color = ColorHelper.DefaultButton11
@@ -345,9 +362,9 @@ function MarketPaiMaiGongShiPanel:UpdateSubButton()
                 v.transform:Find("Select").gameObject:SetActive(false)
                 v.transform:Find("Text"):GetComponent(Text).color = ColorHelper.DefaultButton10
             end
-            v.transform:Find("NotifyPoint").gameObject:SetActive(MarketManager.Instance.redPointDic[1][catalg_1][k] ==
-                true)
-        end
+           -- v.transform:Find("NotifyPoint").gameObject:SetActive(MarketManager.Instance.redPointDic[1][catid][k] ==
+           --     true)
+           end
     else
 
     end
@@ -358,45 +375,38 @@ function MarketPaiMaiGongShiPanel:ReloadBuyPanel()
     self:UpdateBuyPanel()
 
     local model = self.model
-    local catalg_1 = model.currentGoldMain
-    local catalg_2 = model.currentGoldSub
+    local catid = model.currentPaiMaiGongShiMain
+    local catalg_2 = model.currentPaiMaiGongShiSub
     if catalg_2 == 0 then
-        catalg_2 = self.openCatalg2List[catalg_1]
-        model.currentGoldSub = catalg_2
+        catalg_2 = self.openCatalg2List[catid]
+        model.currentPaiMaiGongShiSub = catalg_2
     end
-    MarketManager.Instance:send12400(catalg_1, catalg_2)
+    -- 这里请求当前Btn_subbtn 的协议给服务器
+     --MarketManager.Instance:send12400002(catid, catalg_2)
+     NoticeManager.Instance:FloatTipsByString(TI18N("拍卖Buy——12400002请求"))
 end
 
+-- 发送协议send12400000 会调用这个方法
 -- 更新中间购买列表
 function MarketPaiMaiGongShiPanel:UpdateBuyPanel()
     local model = self.parent.model
-    local catalg_1 = model.currentGoldMain
-    local catalg_2 = model.currentGoldSub
+    local catid = model.currentPaiMaiGongShiMain
+    local catalg_2 = model.currentPaiMaiGongShiSub
     local roleData = RoleManager.Instance.RoleData
-
-    MarketManager.Instance.onUpdateRed:Fire()
-    MarketManager.Instance.redPointDic[1][catalg_1] = MarketManager.Instance.redPointDic[1][catalg_1] or {}
-
-    LuaTimer.Add(500, function()
-        MarketManager.Instance.redPointDic[1][catalg_1][catalg_2] = false
-    end)
-
     PlayerPrefs.SetInt(
-        BaseUtils.Key(roleData.id, roleData.platform, roleData.zone_id, MarketManager.Instance.marketLocalSave, catalg_1,
+        BaseUtils.Key(roleData.id, roleData.platform, roleData.zone_id, MarketManager.Instance.marketLocalSave, catid,
             catalg_2), BaseUtils.BASE_TIME)
 
-    if catalg_2 == 0 then
-        catalg_2 = self.openCatalg2List[catalg_1]
-        model.currentGoldSub = catalg_2
+
+
+  -- 测试  catid = 7_5 只有一个小熊碎片
+    local itemList = model.paimaiBuyItemList
+    itemList[catid] = itemList[catid] or {}
+    if itemList[catid][catalg_2] == nil then
+        --return
     end
 
-    local itemList = model.goldItemList
-    itemList[catalg_1] = itemList[catalg_1] or {}
-    -- if itemList[catalg_1][catalg_2] == nil then
-    --     --return
-    -- end
-
-    itemList = itemList[catalg_1][catalg_2] or {}
+    itemList = itemList[catid][catalg_2] or {}
     if model.targetBaseId ~= nil then
         model.selectPos = nil
         for i = 1, #itemList do
@@ -422,9 +432,15 @@ function MarketPaiMaiGongShiPanel:UpdateBuyPanel()
             model.goldChosenBaseId = model.targetBaseId
         end
     end
+     
+    --测试物品
+    local tempItemList = {}
+    local xiaoxiongsuipian={base_id = 28612,cur_price = 6000,time = 16896734760}
+    table.insert(tempItemList,xiaoxiongsuipian)
+    self.setting_data.data_list = tempItemList
 
-    self.setting_data.data_list = itemList
-    BaseUtils.refresh_circular_list(self.setting_data) --这个地方会更新item的数据,调用Update_my_self方法
+   -- self.setting_data.data_list = itemList
+    BaseUtils.refresh_circular_list(self.setting_data) --这个地方会更新item的数据,调用update_my_self方法
 
     self.doSavePosition = false
     self.vScroll.onValueChanged:Invoke({ 0, 1 })
@@ -434,14 +450,14 @@ function MarketPaiMaiGongShiPanel:UpdateBuyPanel()
 
     self.isRefrshData = false
 end
-
+-- 金币资产翻身发生变化
 function MarketPaiMaiGongShiPanel:RoleAssetsListener()
-    -- if self.gameObject ~= nil and self.assetGoldText ~= nil then
-    --     self.assetGoldText.text = tostring(RoleManager.Instance.RoleData.gold_bind) -- 玩家的金币数量
-    -- end
+    if self.gameObject ~= nil and self.assetGoldText ~= nil then
+        self.assetGoldText.text = tostring(RoleManager.Instance.RoleData.gold_bind) -- 玩家的金币数量
+    end
 end
 
-function MarketPaiMaiGongShiPanel:OnReloadMarketGold()
+function MarketPaiMaiGongShiPanel:OnReloadMarketPaiMaiGongShi()
     local model = self.model
     model.goldChosenBaseId = nil
     model.selectPos = nil
@@ -450,61 +466,39 @@ function MarketPaiMaiGongShiPanel:OnReloadMarketGold()
 end
 
 function MarketPaiMaiGongShiPanel:RemoveListeners()
-    MarketManager.Instance.onReloadGoldMarket:RemoveListener(self.onReloadGoldMarketListener)
-    MarketManager.Instance.onUpdateRed:RemoveListener(self.redListener)
-    EventMgr.Instance:RemoveListener(event_name.world_lev_change, self.worldLevListener)
-    EventMgr.Instance:RemoveListener(event_name.role_level_change, self.levelListener)
-    EventMgr.Instance:RemoveListener(event_name.market_paimai_gongshi_update, self.onReloadGoldMarketListener)
+    MarketManager.Instance.onReloadPaiMaiGongShiMarket:RemoveListener(self.onReloadPaiMaiGongShiMarketListener)
+    --EventMgr.Instance:RemoveListener(event_name.world_lev_change, self.worldLevListener)
+    --EventMgr.Instance:RemoveListener(event_name.role_level_change, self.levelListener)
+    EventMgr.Instance:RemoveListener(event_name.market_paimai_gongshi_update, self.onReloadPaiMaiGongShiMarketListener)
 end
 
-function MarketPaiMaiGongShiPanel:CheckRed()
-    for k, v in pairs(self.btnObjList) do
-        local red = false
-        if MarketManager.Instance.redPointDic[1][k] ~= nil then
-            for _, v in pairs(MarketManager.Instance.redPointDic[1][k]) do
-                red = red or (v == true)
-            end
-        end
-        v.transform:Find("MainButton/NotifyPoint").gameObject:SetActive(red)
-    end
-end
 function MarketPaiMaiGongShiPanel:OnOpen()
 
-    -- local noSub = true
-    -- local model = self.model
-    -- if model.currentGoldSub ~= nil then
-    --     for k,v in pairs(self.subIndex[model.currentGoldMain]) do
-    --         if v == model.currentGoldSub then
-    --             noSub = false
-    --             break
-    --         end
-    --     end
-    -- end
-    -- if noSub then
-    --     model.currentGoldSub = self.subIndex[model.currentGoldMain][1]
-    -- end
+    local noSub = true
+    local model = self.model
+    if model.currentPaiMaiGongShiSub ~= nil then
+        for k,v in pairs(self.subIndex[model.currentPaiMaiGongShiMain]) do
+            if v == model.currentPaiMaiGongShiSub then
+                noSub = false
+                break
+            end
+        end
+    end
+    if noSub then
+        model.currentPaiMaiGongShiSub = 1
+    end
+    
 
-    -- self:CheckOpen()
+    --self:CheckOpen()
 
-    -- self:UpdateMainButton()
-    -- self:UpdateSubButton()
-    -- self:ReloadBuyPanel()
+    self:UpdateMainButton()
+    self:UpdateSubButton()
+    self:ReloadBuyPanel()
 
-    -- self:RemoveListeners()
-    -- -- MarketManager.Instance.onReloadGoldMarket:AddListener(self.onReloadGoldMarketListener)
-    -- MarketManager.Instance.onUpdateRed:AddListener(self.redListener)
-    -- EventMgr.Instance:AddListener(event_name.world_lev_change, self.worldLevListener)
-    -- EventMgr.Instance:AddListener(event_name.role_level_change, self.levelListener)
-    -- EventMgr.Instance:AddListener(event_name.market_paimai_gongshi_update, self.onReloadGoldMarketListener)  -- 数据的更新
-
-    TipsManager.Instance:ShowText({
-        gameObject = self.noticeBtn.gameObject,
-        itemData = {
-            TI18N("打开了公示面板"),
-        }
-    })
-
-
+    self:RemoveListeners()
+    --EventMgr.Instance:AddListener(event_name.world_lev_change, self.worldLevListener)
+    --EventMgr.Instance:AddListener(event_name.role_level_change, self.levelListener)
+    EventMgr.Instance:AddListener(event_name.market_paimai_gongshi_update, self.onReloadPaiMaiGongShiMarketListener)  -- 数据的更新
 end
 function MarketPaiMaiGongShiPanel:OnHide()
     self:RemoveListeners()
@@ -521,16 +515,16 @@ function MarketPaiMaiGongShiPanel:OnHide()
         self.arrowEffect.gameObject:SetActive(false)
     end
 
-    for k1,list in pairs(MarketManager.Instance.redPointDic[1]) do
-        if list ~= nil then
-            for k2,_ in pairs(list) do
-                list[k2] = false
-                PlayerPrefs.SetInt(BaseUtils.Key(roleData.id, roleData.platform, roleData.zone_id, MarketManager.Instance.marketLocalSave, k1, k2), BaseUtils.BASE_TIME)
-            end
-        end
-    end
+    -- for k1,list in pairs(MarketManager.Instance.redPointDic[1]) do
+    --     if list ~= nil then
+    --         for k2,_ in pairs(list) do
+    --             list[k2] = false
+    --             PlayerPrefs.SetInt(BaseUtils.Key(roleData.id, roleData.platform, roleData.zone_id, MarketManager.Instance.marketLocalSave, k1, k2), BaseUtils.BASE_TIME)
+    --         end
+    --     end
+    -- end
 
-    MarketManager.Instance.onUpdateRed:Fire()
+    -- MarketManager.Instance.onUpdateRed:Fire()
 end
 function MarketPaiMaiGongShiPanel:__delete()
     if self.timerId ~= nil then
@@ -551,8 +545,8 @@ function MarketPaiMaiGongShiPanel:__delete()
         self.gridPanel:DeleteMe()
         self.gridPanel = nil
     end
-    if self.cellObjectList ~= nil then
-        for k,v in pairs(self.cellObjectList) do
+    if self.cellObjList ~= nil then
+        for k,v in pairs(self.cellObjList) do
             v:DeleteMe()
         end
         self.cellObjList = nil
@@ -568,15 +562,20 @@ function MarketPaiMaiGongShiPanel:__delete()
 end
 
 function MarketPaiMaiGongShiPanel:CheckOpen()
-    MarketManager.Instance:CheckOpen()
-    local model = self.model
+    -- MarketManager.Instance:CheckOpen()
+    -- local model = self.model
+    -- for main,item in pairs(self.btnObjList) do
+    --     local bool = false
+    --     local sublist = self.subbtnList[main]
+    --     for k,v in pairs(model.goldOpenTab[main]) do
+    --         sublist[k].gameObject:SetActive(v)
+    --         bool = bool or v
+    --     end
+    --     item.gameObject:SetActive(bool) -- 这个Item指的btn7   goldOpenTab存在各个组件的true和false
+    -- end
+
     for main,item in pairs(self.btnObjList) do
-        local bool = false
-        local sublist = self.subbtnList[main]
-        for k,v in pairs(model.goldOpenTab[main]) do
-            sublist[k].gameObject:SetActive(v)
-            bool = bool or v
-        end
-        item.gameObject:SetActive(bool) -- 这个Item指的btn7   goldOpenTab存在各个组件的true和false
+        item.gameObject:SetActive(true) 
     end
+
 end

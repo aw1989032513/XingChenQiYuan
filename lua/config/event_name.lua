@@ -306,6 +306,15 @@ event_name.handbook_autochange = "handbook_autochange"
 event_name.handbook_infoupdate = "handbook_infoupdate"
 -- 金币市场数据更新
 event_name.market_gold_update = "market_gold_update"
+-- 拍卖行购买数据更新
+event_name.market_paimai_buy_update = "market_paimai_buy_update"
+-- 拍卖行公示数据更新
+event_name.market_paimai_gongshi_update = "market_paimai_gongshi_update"
+-- 拍卖行出售数据更新
+event_name.market_paimai_sell_update = "market_paimai_sell_update"
+-- 拍卖行已经购买数据更新
+event_name.market_paimai_purchased_update = "market_paimai_purchased_update"
+
 -- 月度礼包
 event_name.monthly_gift_change = "monthly_gift_change"
 -- 宠物学习技能书

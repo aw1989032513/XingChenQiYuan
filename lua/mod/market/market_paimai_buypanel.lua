@@ -106,7 +106,7 @@ function MarketPaiMaiBuyPanel:InitPanel()
                  model.currentPaiMaiMain = v.catid
                  if model.lastPaiMaiMain ~= model.currentPaiMaiMain then
                      model.currentPaiMaiSub = 1
-                     model.goldChosenBaseId = nil
+                     model.jingpaiChosenBaseId = nil
                      model.selectPos = nil
                  end
                  model.targetBaseId = nil
@@ -133,7 +133,7 @@ function MarketPaiMaiBuyPanel:InitPanel()
                      model.lastGoldSub = model.currentPaiMaiSub
                      model.currentPaiMaiSub = s
                      model.targetBaseId = nil
-                     model.goldChosenBaseId = nil
+                     model.jingpaiChosenBaseId = nil
                      model.selectPos = nil
                      model.lastPosition = 0
                      self:UpdateSubButton()
@@ -193,7 +193,7 @@ function MarketPaiMaiBuyPanel:InitPanel()
         obj.name = tostring(i)
         self.boxBuyYLayout:AddCell(obj)
         obj:SetActive(false)
-        self.cellObjList[i] = MarketPaiMaiItem.New(self.model, obj)
+        self.cellObjList[i] = MarketPaiMaiItem.New(self, obj)
     end
 
      self:InitBuyPanel()
@@ -204,16 +204,16 @@ function MarketPaiMaiBuyPanel:InitPanel()
     self.OnOpenEvent:Fire()
 end
 function MarketPaiMaiBuyPanel:InitBuyPanel()
-
+    local model = self.model
     self.BuyPanelBottom = self.BuyPanel.transform:Find("Bottom")
     --Notice 按钮
     self.noticeBtn = self.BuyPanelBottom.transform:Find("Notice"):GetComponent(Button)
     self.noticeBtn.onClick:AddListener(function() self:OnNotice() end)
     -- 竞价按钮
     self.buyButton = self.BuyPanelBottom.transform:Find("BuyButton"):GetComponent(CustomButton)
-    self.buyButton.onClick:AddListener(function() self:OnBuy() end)
+   -- self.buyButton.onClick:AddListener(function() self:OnBuy() end)
     self.frozen = FrozenButton.New(self.buyButton.gameObject, {})
-    self.buyButton.onHold:AddListener(function() self:OnNumberpad() end)
+    self.buyButton.onClick:AddListener(function() self:OnNumberpad() end) --onHold
 
     --资产
     local role_assets = RoleManager.Instance.RoleData
@@ -224,28 +224,26 @@ function MarketPaiMaiBuyPanel:InitBuyPanel()
     self.numberpadSetting = { -- 弹出小键盘的设置
         gameObject = self.buyButton.gameObject,
         min_result = 1,
-        max_by_asset = 20,
-        max_result = 20,
-        textObject = nil,
-        show_num = false,
-        returnKeep = true,
+        max_by_asset = math.huge,
+        max_result = math.huge,
+        textObject = nil,     -- textObject = self.priceText,
         funcReturn = function(num)
-            model.goldBuyNum = num
+            --model.goldBuyNum = num
             if self.frozen.enabled == true then
-                self:OnBuy()
+                self:OnBuy(num)
             end
-            model.goldBuyNum = 1
+           -- model.goldBuyNum = 1
         end,
         callback = nil,
         show_num = true,
         returnText = TI18N("竞价"),
+ 
     }
     
 
     -- 加号 增加金币，直接打开充值界面
     self.addGoldButton = self.BuyPanelBottom.transform:Find("Image/AddGoldBtn"):GetComponent(Button)
-    self.addGoldButton.onClick:AddListener(function() WindowManager.Instance:OpenWindowById(
-        WindowConfig.WinID.recharge_explain, 1) end)
+    self.addGoldButton.onClick:AddListener(function () WindowManager.Instance:OpenWindowById(WindowConfig.WinID.exchange_window, 1) end)
 end
 
 function MarketPaiMaiBuyPanel:OnNotice()
@@ -253,52 +251,99 @@ function MarketPaiMaiBuyPanel:OnNotice()
     TipsManager.Instance:ShowText({
         gameObject = self.noticeBtn.gameObject,
         itemData = {
-            TI18N("1.可找回<color='#00ff00'>2天</color>内未参加活动的奖励"),
-            TI18N(
-            "2.可选择<color='#ffff00'>完美找回</color>和<color='#ffff00'>普通找回</color>两种方式。<color='#ffff00'>完美找回</color>可找回<color='#00ff00'>100%</color>的奖励；<color='#ffff00'>普通找回</color>可找回<color='#00ff00'>60%</color>的奖励"),
-            TI18N("3.人物等级高于世界等级<color='#00ff00'>7级及以上</color>时，无法找回<color='#ffff00'>经验</color>奖励")
+            -- TI18N("1.可找回<color='#00ff00'>2天</color>内未参加活动的奖励"),
+            -- TI18N(
+            -- "2.可选择<color='#ffff00'>完美找回</color>和<color='#ffff00'>普通找回</color>两种方式。<color='#ffff00'>完美找回</color>可找回<color='#00ff00'>100%</color>的奖励；<color='#ffff00'>普通找回</color>可找回<color='#00ff00'>60%</color>的奖励"),
+            -- TI18N("3.人物等级高于世界等级<color='#00ff00'>7级及以上</color>时，无法找回<color='#ffff00'>经验</color>奖励")
+           
+            TI18N("1、上架道具后需要公示30分钟，公示后方可竞拍（晚上21点-24点上架的不需要公示）"),
+            TI18N("2、00:00-21:00上架的商品在当日22:00前为竞拍阶段"),
+            TI18N("3、21:00-24:00上架的商品到次日22:00为竞拍阶段"),
+            TI18N("4、竞拍阶段其他玩家可以按最低5%的比例进行加价竞拍"),
+            TI18N("5、参与竞拍需要消耗  ‘万象币’"),
+            TI18N("6、有人竞价在竞拍阶段结束后价高者获得商品"),
+            TI18N("7、若最后1分钟内有人出价则剩余竞拍时间会重置为5分钟"),
+            TI18N("8、商品卖出后，扣除手续费，卖家会获得等额的元宝"),
+            TI18N("9、商品如被拍走，请及时到交易行领取竞拍价"),
+            TI18N("10、如果您有幸拍得商品，请及时到交易行领取商品"),
+            TI18N("11、如果商品流拍，请及时到交易行领回商品")
         }
     })
 end
 function MarketPaiMaiBuyPanel:OnNumberpad()
     local model = self.model
-    if model.goldChosenBaseId == nil then
+    if model.jingpaiChosenBaseId == nil then
         NoticeManager.Instance:FloatTipsByString(TI18N("请选择需要购买的物品"))
     else
-        local maxValue = DataItem.data_get[model.goldChosenBaseId].overlap
-        if maxValue > 20 then
-            maxValue = 20
-        end
-        self.numberpadSetting.max_result = maxValue
+        local testStr = tostring(model.jingpaiChosenBaseId)
+        NoticeManager.Instance:FloatTipsByString(TI18N(testStr))
         NumberpadManager.Instance:set_data(self.numberpadSetting)
     end
 end
-function MarketPaiMaiBuyPanel:OnBuy()
+
+function MarketPaiMaiBuyPanel:OnBuy(num)
     local model = self.model
-    local chosenId = model.goldChosenBaseId
+    local chosenId = model.jingpaiChosenBaseId
     local margin = 0
-    local price = 0
+    local price = tostring(num)
+    local tempID = tostring(chosenId)
 
-    -- model.goldItemList 会通过服务器发来的数据赋值
-    model.lastPosition = self.buyPanelContainerRect.anchoredPosition.y
-    if chosenId ~= nil and model.goldItemList[model.currentPaiMaiMain] ~= nil and model.goldItemList[model.currentPaiMaiMain][model.currentPaiMaiSub] ~= nil then
-        self.isRefrshData = true
-        for i,v in ipairs(itemlist) do
-            if v.base_id == chosenId then
-                margin = v.margin
-                price = v.cur_price
-                break
-            end
-        end
-
-
-        -- 弹出小键盘
-        self.numberpadSetting.max_result = maxValue
-        NumberpadManager.Instance:set_data(self.numberpadSetting)
+   --此代码快测试专用
+   if chosenId==nil then
+    NoticeManager.Instance:FloatTipsByString(TI18N("请选择要竞价的商品"))
     else
-        NoticeManager.Instance:FloatTipsByString(TI18N("请选择要竞价的商品"))
-    end
-    -- print(model.targetBaseId)
+        local confirmData = NoticeConfirmData.New()
+        confirmData.type = ConfirmData.Style.Normal
+                     local str = "是否确定以[".."<color='#ffff00'>"..price.."</color>".."]".."的价格竞拍".."<color='#ffff00'>"..tempID.."</color>"
+                    -- local str2 ="以低价".."<color='#ffff00'>"..maxPrice.."</color>".."的".."<color='#ff4500'>".."万象币,".."</color>".."价格上架，数量："
+                    -- local str3 = "<color='#ffff00'>"..itemNum.."</color>".."个。"
+                    confirmData.content = TI18N(str)
+                    confirmData.sureSecond = -1
+                    confirmData.cancelSecond = -1
+                    confirmData.sureLabel = TI18N("确认")
+                    confirmData.cancelLabel = TI18N("取消")
+                    confirmData.sureCallback = function()
+                        -- 发送竞价协议                     
+                        --MarketManager.Instance:send12401(chosenId, model.goldBuyNum)
+                        NoticeManager.Instance:FloatTipsByString(TI18N("发送了竞价协议"..tempID.."价格："..price))            
+                    end
+                    NoticeManager.Instance:ConfirmTips(confirmData)
+   end
+--此代码快测试专用
+
+    -- model.lastPosition = self.buyPanelContainerRect.anchoredPosition.y
+    -- if chosenId ~= nil and model.paimaiBuyItemList[model.currentPaiMaiMain] ~= nil and model.paimaiBuyItemList[model.currentPaiMaiMain][model.currentPaiMaiSub] ~= nil then
+    --     self.isRefrshData = true
+    --     local itemlist = model.paimaiBuyItemList[model.currentPaiMaiMain][model.currentPaiMaiSub]
+    --     for i,v in ipairs(itemlist) do
+    --         if v.base_id == chosenId then
+    --             margin = v.margin  -- 服务器发来的数据
+    --             price = v.cur_price
+    --             break
+    --         end
+    --     end
+
+    --     -- 弹出购买的提示框
+    --     local confirmData = NoticeConfirmData.New()
+    --     confirmData.type = ConfirmData.Style.Normal
+    --     local str = "是否确定上架[".."<color='#ffff00'>"..itemName.."</color>".."]"
+    --                 local str2 ="以低价".."<color='#ffff00'>"..maxPrice.."</color>".."的".."<color='#ff4500'>".."万象币,".."</color>".."价格上架，数量："
+    --                 local str3 = "<color='#ffff00'>"..itemNum.."</color>".."个。"
+    --                 confirmData.content = TI18N(str..str2..str3)
+    --                 confirmData.sureSecond = -1
+    --                 confirmData.cancelSecond = -1
+    --                 confirmData.sureLabel = TI18N("确认")
+    --                 confirmData.cancelLabel = TI18N("取消")
+    --                 confirmData.sureCallback = function()
+    --                     -- 发送竞价协议 
+    --                     local tempID = tostring(chosenId)
+    --                     --MarketManager.Instance:send12401(chosenId, model.goldBuyNum)
+    --                     NoticeManager.Instance:FloatTipsByString(TI18N("发送了竞价协议"..tempID))            
+    --                 end
+    --                 NoticeManager.Instance:ConfirmTips(confirmData)
+    -- else
+    --     NoticeManager.Instance:FloatTipsByString(TI18N("请选择要竞价的商品"))
+    -- end
 end
 
 -- -- 更新按钮状态和箭头，高亮图片
@@ -409,7 +454,7 @@ function MarketPaiMaiBuyPanel:UpdateBuyPanel()
             catalg_2), BaseUtils.BASE_TIME)
 
 
-    local itemList = model.goldItemList
+    local itemList = model.paimaiBuyItemList
     itemList[catid] = itemList[catid] or {}
     -- if itemList[catid][catalg_2] == nil then
     --     --return
@@ -438,11 +483,19 @@ function MarketPaiMaiBuyPanel:UpdateBuyPanel()
                 model.lastPosition = 0
             end
 
-            model.goldChosenBaseId = model.targetBaseId
+            model.jingpaiChosenBaseId = model.targetBaseId
         end
     end
 
-    self.setting_data.data_list = itemList
+    --测试物品代码
+
+    local tempItemList = {}
+    local xiaoxiongsuipian={base_id = 28612,cur_price = 6000,time = 16896734760 ,guanzhuState = true}
+    table.insert(tempItemList,xiaoxiongsuipian)
+    self.setting_data.data_list = tempItemList
+    --测试
+
+    --self.setting_data.data_list = itemList
     BaseUtils.refresh_circular_list(self.setting_data) --这个地方会更新item的数据,调用Update_my_self方法
 
     self.doSavePosition = false
@@ -462,7 +515,7 @@ end
 
 function MarketPaiMaiBuyPanel:OnReloadMarketPaiMaiBuy()
     local model = self.model
-    model.goldChosenBaseId = nil
+    model.jingpaiChosenBaseId = nil
     model.selectPos = nil
     model.lastSelectObj = nil
     self:UpdateBuyPanel()
@@ -502,12 +555,12 @@ function MarketPaiMaiBuyPanel:OnOpen()
     --EventMgr.Instance:AddListener(event_name.role_level_change, self.levelListener)
     EventMgr.Instance:AddListener(event_name.market_paimai_buy_update, self.onReloadPaiMaiBuyMarketListener)  -- 数据的更新
 
-    TipsManager.Instance:ShowText({
-        gameObject = self.noticeBtn.gameObject,
-        itemData = {
-            TI18N("打开了拍卖购买面板"),
-        }
-    })
+    -- TipsManager.Instance:ShowText({
+    --     gameObject = self.noticeBtn.gameObject,
+    --     itemData = {
+    --         TI18N("打开了拍卖购买面板"),
+    --     }
+    -- })
 
 
 end
@@ -520,7 +573,7 @@ function MarketPaiMaiBuyPanel:OnHide()
         end
     end
     self.model.selectPos = nil
-    self.model.goldChosenBaseId = nil
+    self.model.jingpaiChosenBaseId = nil
     self.model.lastGoldTime = nil
     if self.arrowEffect ~= nil and not BaseUtils.isnull(self.arrowEffect.gameObject) then
         self.arrowEffect.gameObject:SetActive(false)
@@ -552,12 +605,13 @@ function MarketPaiMaiBuyPanel:__delete()
         self.boxYLayout:DeleteMe()
         self.boxYLayout = nil
     end
-    if self.gridPanel ~= nil then
-        self.gridPanel:DeleteMe()
-        self.gridPanel = nil
+    if self.numberpadSetting ~= nil then
+        self.numberpadSetting.textObject = nil
+        self.numberpadSetting = nil
     end
-    if self.cellObjectList ~= nil then
-        for k,v in pairs(self.cellObjectList) do
+
+    if self.cellObjList ~= nil then
+        for k,v in pairs(self.cellObjList) do
             v:DeleteMe()
         end
         self.cellObjList = nil

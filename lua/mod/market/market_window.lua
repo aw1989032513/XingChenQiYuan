@@ -11,6 +11,13 @@ function MarketWindow:__init(model)
         {file = AssetConfig.market_window, type = AssetType.Main}
         , {file = AssetConfig.market_textures, type = AssetType.Dep}
     }
+
+     --两张表
+     self.buyPanelStar = {}-- 购买面板的关注物体
+     self.buyPanelCancelStar = {}
+     self.gongShiStar  = {}
+     self.gongShiCancelStar  = {}
+
     self.subPanel = {nil, nil, nil,nil}   --4个面板
     self.btnTabSide = {nil, nil, nil,nil} --4个Tab
     self.nameSubPanel = {TI18N("金币市场"), TI18N("交易市场"), TI18N("出售物品"),TI18N("拍卖行")}
@@ -132,6 +139,12 @@ function MarketWindow:__delete()
         GameObject.DestroyImmediate(self.gameObject)
         self.gameObject = nil
     end
+    if  #self.buyPanelStar > 0 then
+        self.buyPanelStar = {}
+    end  
+    if  #self.buyPanelCancelStar > 0 then
+        self.buyPanelCancelStar = {}
+    end  
     self:AssetClearAll()
 end
 
@@ -170,6 +183,19 @@ function MarketWindow:OnHide()
             v:Hiden()
         end
     end
+
+    if  #self.buyPanelStar > 0 then
+        local numStr = tostring(self.buyPanelStar )
+        NoticeManager.Instance:FloatTipsByString(TI18N("收藏的星星物体有"..numStr)) 
+        self.buyPanelStar ={}
+    end
+    if  #self.buyPanelCancelStar > 0 then
+        local numStr1 = tostring(self.buyPanelCancelStar )
+        NoticeManager.Instance:FloatTipsByString(TI18N("取消收藏的星星物体有"..numStr1)) 
+        self.buyPanelCancelStar ={}
+        -- 这里向服务器发送协议
+        --MarketManager.Instance:send16704(self.buyPanelStar)
+    end  
 end
 -- 红点系统
 function MarketWindow:CheckRed()

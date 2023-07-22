@@ -33,6 +33,9 @@ function MarketSellPanel:InitPanel()
     t.localPosition = Vector3(0, 0, 0)
     t.localScale = Vector3(1, 1, 1)
 
+    -- self.rectTransform = self.gameObject:GetComponent(RectTransform)
+    -- self.rectTransform.offsetMin =  Vector2(0,0)
+    -- self.rectTransform.offsetMax =  Vector2(0,0)
     t:Find("DescText"):GetComponent(Text).text = TI18N("注：<color='#e8faff'>24小时</color>未卖出会返回")
     self.buyPanel = t:Find("BuyPanel")
     self.itemTemplate = self.buyPanel:Find("ItemObject").gameObject
