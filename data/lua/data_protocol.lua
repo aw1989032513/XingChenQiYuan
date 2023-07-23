@@ -8167,7 +8167,153 @@ M.recv = {
                 {name = "attr", type = "uint8"},
                 {name = "value", type = "uint32"}
             }}, 
-            {name = "status", type = "uint8"}
+            {name = "status", type = "uint8"},
+            {name = "pet", type = "array", fields = {
+                {name = "id", type = "uint32"},
+                {name = "name", type = "string"},
+                {name = "lev", type = "uint8"},
+                {name = "exp", type = "uint32"},
+                {name = "max_exp", type = "uint32"},
+                {name = "status", type = "uint8"},
+                {name = "base_id", type = "uint32"},
+                {name = "happy", type = "uint32"},
+                {name = "grade", type = "uint8"},
+                {name = "talent", type = "uint16"},
+                {name = "genre", type = "uint8"},
+                {name = "growth", type = "uint16"},
+                {name = "growth_type", type = "uint8"},
+                {name = "hp", type = "uint32"},
+                {name = "mp", type = "uint32"},
+                {name = "feed_point", type = "uint32"},
+                {name = "free_reset_flag", type = "uint32"},
+                {name = "use_growth", type = "uint8"},
+                {name = "lock", type = "uint8"},
+                {name = "hp_max", type = "uint32"},
+                {name = "mp_max", type = "uint32"},
+                {name = "atk_speed", type = "uint16"},
+                {name = "phy_dmg", type = "uint32"},
+                {name = "magic_dmg", type = "uint32"},
+                {name = "phy_def", type = "uint32"},
+                {name = "magic_def", type = "uint32"},
+                {name = "strength", type = "uint16"},
+                {name = "constitution", type = "uint16"},
+                {name = "magic", type = "uint16"},
+                {name = "agility", type = "uint16"},
+                {name = "endurance", type = "uint16"},
+                {name = "point", type = "uint16"},
+                {name = "p_str", type = "uint16"},
+                {name = "p_con", type = "uint16"},
+                {name = "p_mag", type = "uint16"},
+                {name = "p_agi", type = "uint16"},
+                {name = "p_end", type = "uint16"},
+                {name = "hp_aptitude", type = "uint16"},
+                {name = "phy_aptitude", type = "uint16"},
+                {name = "pdef_aptitude", type = "uint16"},
+                {name = "magic_aptitude", type = "uint16"},
+                {name = "aspd_aptitude", type = "uint16"},
+                {name = "max_hp_aptitude", type = "uint16"},
+                {name = "max_phy_aptitude", type = "uint16"},
+                {name = "max_pdef_aptitude", type = "uint16"},
+                {name = "max_magic_aptitude", type = "uint16"},
+                {name = "max_aspd_aptitude", type = "uint16"},
+                {name = "max_hp_apt_used", type = "uint8"},
+                {name = "max_phy_apt_used", type = "uint8"},
+                {name = "max_pdef_apt_used", type = "uint8"},
+                {name = "max_magic_apt_used", type = "uint8"},
+                {name = "max_aspd_apt_used", type = "uint8"},
+                {name = "skills", type = "array", fields = {
+                    {name = "id", type = "uint32"},
+                    {name = "source", type = "uint8"},
+                    {name = "is_lock", type = "uint8"}
+                }}, 
+                {name = "stones", type = "array", fields = {
+                    {name = "id", type = "uint32"},
+                    {name = "base_id", type = "uint32"},
+                    {name = "attr", type = "array", fields = {
+                        {name = "type", type = "uint16"},
+                        {name = "name", type = "uint32"},
+                        {name = "flag", type = "uint32"},
+                        {name = "val", type = "int32"}
+                    }}, 
+                    {name = "reset_attr", type = "array", fields = {
+                        {name = "type", type = "uint16"},
+                        {name = "name", type = "uint32"},
+                        {name = "flag", type = "uint32"},
+                        {name = "val", type = "int32"}
+                    }}, 
+                    {name = "extra", type = "array", fields = {
+                        {name = "name", type = "uint32"},
+                        {name = "value", type = "uint32"},
+                        {name = "str", type = "string"}
+                    }}
+                }}, 
+                {name = "grade_attr", type = "array", fields = {
+                    {name = "type", type = "uint16"},
+                    {name = "name", type = "uint32"},
+                    {name = "flag", type = "uint32"},
+                    {name = "val", type = "int32"}
+                }}, 
+                {name = "break_times", type = "uint8"},
+                {name = "handbook_attr", type = "array", fields = {
+                    {name = "attr_name", type = "uint32"},
+                    {name = "attr_val", type = "uint32"}
+                }}, 
+                {name = "handbook_num", type = "uint8"},
+                {name = "star_handbook_num", type = "uint8"},
+                {name = "use_skin", type = "uint32"},
+                {name = "has_skin", type = "array", fields = {
+                    {name = "skin_id", type = "uint32"}
+                }}, 
+                {name = "spirit_attached", type = "uint8"},
+                {name = "spirit_attached_id", type = "uint32"},
+                {name = "unreal", type = "array", fields = {
+                    {name = "item_id", type = "uint32"},
+                    {name = "timeout", type = "uint32"}
+                }}, 
+                {name = "spirit_child_flag", type = "uint8"},
+                {name = "child_id", type = "uint32"},
+                {name = "platform", type = "string"},
+                {name = "zone_id", type = "uint16"},
+                {name = "unreal_looks_flag", type = "uint8"},
+                {name = "pet_rune", type = "array", fields = {
+                    {name = "rune_index", type = "uint8"},
+                    {name = "rune_type", type = "uint8"},
+                    {name = "rune_status", type = "uint8"},
+                    {name = "rune_id", type = "uint32"},
+                    {name = "rune_lev", type = "uint8"},
+                    {name = "is_resonance", type = "uint8"},
+                    {name = "resonances", type = "array", fields = {
+                        {name = "resonance_index", type = "uint8"},
+                        {name = "resonance_id", type = "uint32"},
+                        {name = "rune_index", type = "uint8"}
+                    }}
+                }}
+            }}, 
+            {name = "eqm", type = "array", fields = {
+                {name = "id", type = "uint32"},
+                {name = "base_id", type = "uint32"},
+                {name = "bind", type = "uint8"},
+                {name = "craft", type = "uint8"},
+                {name = "enchant", type = "int8"},
+                {name = "quantity", type = "uint32"},
+                {name = "pos", type = "uint16"},
+                {name = "step", type = "uint8"},
+                {name = "growth_lev", type = "uint8"},
+                {name = "growth_val", type = "uint16"},
+                {name = "expire_type", type = "uint8"},
+                {name = "expire_time", type = "uint32"},
+                {name = "attr", type = "array", fields = {
+                    {name = "type", type = "uint16"},
+                    {name = "name", type = "uint32"},
+                    {name = "flag", type = "uint32"},
+                    {name = "val", type = "int32"}
+                }}, 
+                {name = "extra", type = "array", fields = {
+                    {name = "name", type = "uint32"},
+                    {name = "value", type = "uint32"},
+                    {name = "str", type = "string"}
+                }}
+            }}
         }}
     },
     [12408] = {
@@ -8187,6 +8333,160 @@ M.recv = {
                 {name = "item_attrs", type = "array", fields = {
                     {name = "attr", type = "uint8"},
                     {name = "value", type = "uint32"}
+                }}, 
+                {name = "genre", type = "uint8"},
+                {name = "lev", type = "uint8"}
+            }}
+        }}, 
+        {name = "petlist", type = "array", fields = {
+            {name = "id", type = "uint8"},
+            {name = "pet_list", type = "array", fields = {
+                {name = "id", type = "uint32"},
+                {name = "name", type = "string"},
+                {name = "lev", type = "uint8"},
+                {name = "exp", type = "uint32"},
+                {name = "max_exp", type = "uint32"},
+                {name = "status", type = "uint8"},
+                {name = "base_id", type = "uint32"},
+                {name = "happy", type = "uint32"},
+                {name = "grade", type = "uint8"},
+                {name = "talent", type = "uint16"},
+                {name = "genre", type = "uint8"},
+                {name = "growth", type = "uint16"},
+                {name = "growth_type", type = "uint8"},
+                {name = "hp", type = "uint32"},
+                {name = "mp", type = "uint32"},
+                {name = "feed_point", type = "uint32"},
+                {name = "free_reset_flag", type = "uint32"},
+                {name = "use_growth", type = "uint8"},
+                {name = "lock", type = "uint8"},
+                {name = "hp_max", type = "uint32"},
+                {name = "mp_max", type = "uint32"},
+                {name = "atk_speed", type = "uint16"},
+                {name = "phy_dmg", type = "uint32"},
+                {name = "magic_dmg", type = "uint32"},
+                {name = "phy_def", type = "uint32"},
+                {name = "magic_def", type = "uint32"},
+                {name = "strength", type = "uint16"},
+                {name = "constitution", type = "uint16"},
+                {name = "magic", type = "uint16"},
+                {name = "agility", type = "uint16"},
+                {name = "endurance", type = "uint16"},
+                {name = "point", type = "uint16"},
+                {name = "p_str", type = "uint16"},
+                {name = "p_con", type = "uint16"},
+                {name = "p_mag", type = "uint16"},
+                {name = "p_agi", type = "uint16"},
+                {name = "p_end", type = "uint16"},
+                {name = "hp_aptitude", type = "uint16"},
+                {name = "phy_aptitude", type = "uint16"},
+                {name = "pdef_aptitude", type = "uint16"},
+                {name = "magic_aptitude", type = "uint16"},
+                {name = "aspd_aptitude", type = "uint16"},
+                {name = "max_hp_aptitude", type = "uint16"},
+                {name = "max_phy_aptitude", type = "uint16"},
+                {name = "max_pdef_aptitude", type = "uint16"},
+                {name = "max_magic_aptitude", type = "uint16"},
+                {name = "max_aspd_aptitude", type = "uint16"},
+                {name = "max_hp_apt_used", type = "uint8"},
+                {name = "max_phy_apt_used", type = "uint8"},
+                {name = "max_pdef_apt_used", type = "uint8"},
+                {name = "max_magic_apt_used", type = "uint8"},
+                {name = "max_aspd_apt_used", type = "uint8"},
+                {name = "skills", type = "array", fields = {
+                    {name = "id", type = "uint32"},
+                    {name = "source", type = "uint8"},
+                    {name = "is_lock", type = "uint8"}
+                }}, 
+                {name = "stones", type = "array", fields = {
+                    {name = "id", type = "uint32"},
+                    {name = "base_id", type = "uint32"},
+                    {name = "attr", type = "array", fields = {
+                        {name = "type", type = "uint16"},
+                        {name = "name", type = "uint32"},
+                        {name = "flag", type = "uint32"},
+                        {name = "val", type = "int32"}
+                    }}, 
+                    {name = "reset_attr", type = "array", fields = {
+                        {name = "type", type = "uint16"},
+                        {name = "name", type = "uint32"},
+                        {name = "flag", type = "uint32"},
+                        {name = "val", type = "int32"}
+                    }}, 
+                    {name = "extra", type = "array", fields = {
+                        {name = "name", type = "uint32"},
+                        {name = "value", type = "uint32"},
+                        {name = "str", type = "string"}
+                    }}
+                }}, 
+                {name = "grade_attr", type = "array", fields = {
+                    {name = "type", type = "uint16"},
+                    {name = "name", type = "uint32"},
+                    {name = "flag", type = "uint32"},
+                    {name = "val", type = "int32"}
+                }}, 
+                {name = "break_times", type = "uint8"},
+                {name = "handbook_attr", type = "array", fields = {
+                    {name = "attr_name", type = "uint32"},
+                    {name = "attr_val", type = "uint32"}
+                }}, 
+                {name = "handbook_num", type = "uint8"},
+                {name = "star_handbook_num", type = "uint8"},
+                {name = "use_skin", type = "uint32"},
+                {name = "has_skin", type = "array", fields = {
+                    {name = "skin_id", type = "uint32"}
+                }}, 
+                {name = "spirit_attached", type = "uint8"},
+                {name = "spirit_attached_id", type = "uint32"},
+                {name = "unreal", type = "array", fields = {
+                    {name = "item_id", type = "uint32"},
+                    {name = "timeout", type = "uint32"}
+                }}, 
+                {name = "spirit_child_flag", type = "uint8"},
+                {name = "child_id", type = "uint32"},
+                {name = "platform", type = "string"},
+                {name = "zone_id", type = "uint16"},
+                {name = "unreal_looks_flag", type = "uint8"},
+                {name = "pet_rune", type = "array", fields = {
+                    {name = "rune_index", type = "uint8"},
+                    {name = "rune_type", type = "uint8"},
+                    {name = "rune_status", type = "uint8"},
+                    {name = "rune_id", type = "uint32"},
+                    {name = "rune_lev", type = "uint8"},
+                    {name = "is_resonance", type = "uint8"},
+                    {name = "resonances", type = "array", fields = {
+                        {name = "resonance_index", type = "uint8"},
+                        {name = "resonance_id", type = "uint32"},
+                        {name = "rune_index", type = "uint8"}
+                    }}
+                }}
+            }}
+        }}, 
+        {name = "eqmlist", type = "array", fields = {
+            {name = "id", type = "uint8"},
+            {name = "eqm_item", type = "array", fields = {
+                {name = "id", type = "uint32"},
+                {name = "base_id", type = "uint32"},
+                {name = "bind", type = "uint8"},
+                {name = "craft", type = "uint8"},
+                {name = "enchant", type = "int8"},
+                {name = "quantity", type = "uint32"},
+                {name = "pos", type = "uint16"},
+                {name = "step", type = "uint8"},
+                {name = "growth_lev", type = "uint8"},
+                {name = "growth_val", type = "uint16"},
+                {name = "expire_type", type = "uint8"},
+                {name = "expire_time", type = "uint32"},
+                {name = "attr", type = "array", fields = {
+                    {name = "type", type = "uint16"},
+                    {name = "name", type = "uint32"},
+                    {name = "flag", type = "uint32"},
+                    {name = "val", type = "int32"}
+                }}, 
+                {name = "extra", type = "array", fields = {
+                    {name = "name", type = "uint32"},
+                    {name = "value", type = "uint32"},
+                    {name = "str", type = "string"}
                 }}
             }}
         }}
@@ -9139,6 +9439,11 @@ M.recv = {
         }}
     },
     [13405] = {
+        {name = "sess_id", type = "uint32"},
+        {name = "platform", type = "string"},
+        {name = "zone_id", type = "uint16"}
+    },
+    [13406] = {
         {name = "sess_id", type = "uint32"},
         {name = "platform", type = "string"},
         {name = "zone_id", type = "uint16"}
@@ -11654,7 +11959,6 @@ M.recv = {
         {name = "fc", type = "uint32"},
         {name = "list", type = "array", fields = {
             {name = "id", type = "uint32"},
-            {name = "name", type = "string"},
             {name = "finish", type = "uint32"},
             {name = "progress", type = "array", fields = {
                 {name = "id", type = "int16"},
@@ -11684,7 +11988,6 @@ M.recv = {
         {name = "fc", type = "uint32"},
         {name = "list", type = "array", fields = {
             {name = "id", type = "uint32"},
-            {name = "name", type = "string"},
             {name = "finish", type = "uint32"},
             {name = "progress", type = "array", fields = {
                 {name = "id", type = "int16"},
@@ -20394,7 +20697,8 @@ M.recv = {
         {name = "reset_times", type = "uint8"},
         {name = "choose_ids", type = "array", fields = {
             {name = "id", type = "uint32"}
-        }}
+        }}, 
+        {name = "pray_times", type = "uint32"}
     },
     [21201] = {
         {name = "flag", type = "uint8"},
@@ -20412,6 +20716,10 @@ M.recv = {
             {name = "item_id", type = "uint32"},
             {name = "count", type = "uint32"}
         }}
+    },
+    [21205] = {
+        {name = "flag", type = "uint8"},
+        {name = "msg", type = "string"}
     },
     [9900] = {
         {name = "msg", type = "string"}
@@ -24134,6 +24442,11 @@ M.send = {
 
     },
     [13405] = {
+        {name = "sess_id", type = "uint32"},
+        {name = "platform", type = "string"},
+        {name = "zone_id", type = "uint16"}
+    },
+    [13406] = {
         {name = "sess_id", type = "uint32"},
         {name = "platform", type = "string"},
         {name = "zone_id", type = "uint16"}
@@ -28511,6 +28824,11 @@ M.send = {
     [21203] = {
 
     },
+    [21205] = {
+        {name = "id", type = "uint32"},
+        {name = "platform", type = "string"},
+        {name = "zone_id", type = "uint16"}
+    },
     [9900] = {
         {name = "cmd", type = "string"}
     },
@@ -28870,7 +29188,7 @@ M.can_cache = {
     [10429] = true,
     [10430] = true,
     [10431] = true,
-    [10432] = true,
+    [10432] = false,
     [10500] = false,
     [10501] = true,
     [10502] = true,
@@ -29580,6 +29898,7 @@ M.can_cache = {
     [13403] = true,
     [13404] = true,
     [13405] = true,
+    [13406] = true,
     [13500] = true,
     [13501] = true,
     [13502] = false,
@@ -30800,6 +31119,7 @@ M.can_cache = {
     [21201] = false,
     [21202] = false,
     [21203] = false,
+    [21205] = false,
     [9900] = true,
     [9901] = true,
     [9902] = true,
