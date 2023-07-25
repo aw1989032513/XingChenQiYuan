@@ -20,7 +20,7 @@ DataMarketTbank.data_market_tbank_category = {
 
 DataMarketTbank.data_market_tbank_item_length = 1184
 DataMarketTbank.data_market_tbank_item = {
-	["1_71913"] = {id = 10000, base_id = 71913, type = 1, catname = "幻  化", catid = 1, subname = "神兽幻化", subid = 1, name = "泡泡龙幻化果", min_price = 10, max_price = 999999, tax = 10, cansell = 1, score = 0, gain_label = "qixiIntegral", world_lev = 25, sort = 1},
+	["1_71913"] = {id = 10000, base_id = 71913, type = 1, catname = "幻  化", catid = 1, subname = "神兽幻化", subid = 1, name = "test1", min_price = 10, max_price = 999999, tax = 10, cansell = 1, score = 0, gain_label = "qixiIntegral", world_lev = 25, sort = 1},
 	["1_71914"] = {id = 10001, base_id = 71914, type = 1, catname = "幻  化", catid = 1, subname = "神兽幻化", subid = 1, name = "不死鸾鸟幻化果", min_price = 10, max_price = 999999, tax = 10, cansell = 1, score = 0, gain_label = "qixiIntegral", world_lev = 25, sort = 2},
 	["1_71915"] = {id = 10002, base_id = 71915, type = 1, catname = "幻  化", catid = 1, subname = "神兽幻化", subid = 1, name = "赤电幻化果", min_price = 10, max_price = 999999, tax = 10, cansell = 1, score = 0, gain_label = "qixiIntegral", world_lev = 25, sort = 3},
 	["1_71916"] = {id = 10003, base_id = 71916, type = 1, catname = "幻  化", catid = 1, subname = "神兽幻化", subid = 1, name = "功夫熊猫幻化果", min_price = 10, max_price = 999999, tax = 10, cansell = 1, score = 0, gain_label = "qixiIntegral", world_lev = 25, sort = 4},

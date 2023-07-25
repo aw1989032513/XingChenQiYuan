@@ -2159,6 +2159,7 @@ M.recv = {
             {name = "free_reset_flag", type = "uint32"},
             {name = "use_growth", type = "uint8"},
             {name = "lock", type = "uint8"},
+            {name = "star", type = "uint8"},
             {name = "hp_max", type = "uint32"},
             {name = "mp_max", type = "uint32"},
             {name = "atk_speed", type = "uint16"},
@@ -3113,6 +3114,16 @@ M.recv = {
                 {name = "rune_index", type = "uint8"}
             }}
         }}
+    },
+    [10581] = {
+        {name = "flag", type = "uint8"},
+        {name = "msg", type = "string"},
+        {name = "id", type = "uint32"},
+        {name = "star", type = "uint8"}
+    },
+    [10582] = {
+        {name = "flag", type = "uint8"},
+        {name = "msg", type = "string"}
     },
     [10600] = {
         {name = "flag", type = "uint8"},
@@ -9446,7 +9457,8 @@ M.recv = {
     [13406] = {
         {name = "sess_id", type = "uint32"},
         {name = "platform", type = "string"},
-        {name = "zone_id", type = "uint16"}
+        {name = "zone_id", type = "uint16"},
+        {name = "result", type = "uint8"}
     },
     [13500] = {
         {name = "result", type = "uint8"},
@@ -13191,67 +13203,23 @@ M.recv = {
         {name = "auction_list", type = "array", fields = {
             {name = "idx", type = "uint32"},
             {name = "item_id", type = "uint32"},
-            {name = "item_count", type = "uint16"},
-            {name = "gold", type = "uint32"},
-            {name = "gold_my", type = "uint32"},
-            {name = "gold_once", type = "uint16"},
-            {name = "over_time", type = "uint32"},
-            {name = "focus", type = "uint8"},
-            {name = "state", type = "uint8"}
+            {name = "num", type = "uint16"},
+            {name = "price", type = "uint32"},
+            {name = "status", type = "uint8"},
+            {name = "flag", type = "uint8"}
         }}
-    },
-    [16701] = {
-        {name = "list", type = "array", fields = {
-            {name = "idx", type = "uint32"},
-            {name = "item_id", type = "uint32"},
-            {name = "item_count", type = "uint16"},
-            {name = "gold", type = "uint32"},
-            {name = "gold_my", type = "uint32"},
-            {name = "gold_once", type = "uint16"},
-            {name = "over_time", type = "uint32"},
-            {name = "state", type = "uint8"}
-        }}
-    },
-    [16702] = {
-        {name = "idx", type = "uint32"},
-        {name = "focus", type = "uint8"}
     },
     [16703] = {
-        {name = "idx", type = "uint32"},
-        {name = "gold", type = "uint32"},
-        {name = "gold_my", type = "uint32"},
-        {name = "once", type = "uint16"},
-        {name = "over_time", type = "uint32"},
-        {name = "state", type = "uint8"}
+        {name = "result", type = "uint8"},
+        {name = "msg", type = "string"}
     },
     [16704] = {
-        {name = "idx", type = "uint32"},
-        {name = "item_id", type = "uint32"},
-        {name = "item_count", type = "uint16"},
-        {name = "gold", type = "uint32"},
-        {name = "gold_my", type = "uint32"},
-        {name = "gold_once", type = "uint16"},
-        {name = "over_time", type = "uint32"},
-        {name = "focus", type = "uint8"}
+        {name = "result", type = "uint8"},
+        {name = "msg", type = "string"}
     },
     [16705] = {
-
-    },
-    [16706] = {
-        {name = "time_list", type = "array", fields = {
-            {name = "start_time", type = "uint32"},
-            {name = "end_time", type = "uint32"}
-        }}
-    },
-    [16707] = {
-        {name = "item_list", type = "array", fields = {
-            {name = "idx", type = "uint32"},
-            {name = "gold", type = "uint32"},
-            {name = "gold_my", type = "uint32"},
-            {name = "once", type = "uint16"},
-            {name = "over_time", type = "uint32"},
-            {name = "state", type = "uint8"}
-        }}
+        {name = "result", type = "uint8"},
+        {name = "msg", type = "string"}
     },
     [16800] = {
         {name = "result", type = "uint8"},
@@ -22114,6 +22082,12 @@ M.send = {
     [10579] = {
 
     },
+    [10581] = {
+        {name = "pet_id", type = "uint32"}
+    },
+    [10582] = {
+        {name = "pet_id", type = "uint32"}
+    },
     [10600] = {
         {name = "id", type = "uint32"},
         {name = "is_perfect", type = "uint8"},
@@ -25977,31 +25951,17 @@ M.send = {
     [16700] = {
 
     },
-    [16701] = {
-
-    },
-    [16702] = {
-        {name = "idx", type = "uint32"}
-    },
     [16703] = {
         {name = "idx", type = "uint32"},
-        {name = "gold_add", type = "uint16"},
         {name = "gold", type = "uint32"}
     },
     [16704] = {
-        {name = "idx", type = "uint32"},
-        {name = "gold_add", type = "uint8"},
-        {name = "gold", type = "uint32"},
-        {name = "gold_max", type = "uint32"}
+        {name = "idx", type = "uint32"}
     },
     [16705] = {
-
-    },
-    [16706] = {
-
-    },
-    [16707] = {
-
+        {name = "idx", type = "uint32"},
+        {name = "price", type = "uint16"},
+        {name = "num", type = "uint16"}
     },
     [16800] = {
         {name = "summary", type = "string"},
@@ -29267,6 +29227,8 @@ M.can_cache = {
     [10577] = false,
     [10578] = false,
     [10579] = true,
+    [10581] = true,
+    [10582] = true,
     [10600] = true,
     [10602] = true,
     [10603] = true,
@@ -30332,13 +30294,9 @@ M.can_cache = {
     [16607] = false,
     [16608] = false,
     [16700] = false,
-    [16701] = false,
-    [16702] = false,
     [16703] = false,
     [16704] = false,
     [16705] = false,
-    [16706] = false,
-    [16707] = false,
     [16800] = true,
     [16801] = false,
     [16802] = false,
