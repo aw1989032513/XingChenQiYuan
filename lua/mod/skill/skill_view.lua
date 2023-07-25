@@ -13,7 +13,8 @@ function SkillView:__init(model)
         self.cacheMode = CacheMode.Destroy
     end
     self.resList = {
-        {file = AssetConfig.skill_window, type = AssetType.Main}
+        {file = AssetConfig.skill_window, type = AssetType.Main},
+        {file = AssetConfig.base_textures, type = AssetType.Dep}
     }
 
     self.gameObject = nil
@@ -28,7 +29,8 @@ function SkillView:__init(model)
         base = 1,
         prac = 2,
         life = 3,
-        assist = 4
+        assist = 4,
+        bagua = 5
     }
 
     ------------------------------------------------
@@ -152,7 +154,9 @@ function SkillView:ChangeTab(index)
         elseif index == self.childIndex.life then
             child = SkillViewTabThree.New(self)
         elseif index == self.childIndex.assist then
-            child = SkillView_Assist.New(self)
+             child = SkillView_Assist.New(self)
+        elseif index == self.childIndex.bagua then
+            child = SkillView_Bagua.New(self)
         else
             child = SkillView_Base.New(self)
         end

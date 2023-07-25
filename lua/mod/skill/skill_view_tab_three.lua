@@ -39,6 +39,8 @@ function SkillViewTabThree:__delete()
         self.imgLoader = nil
     end
 
+	BaseUtils.dump(self.item_list, "蓝莓汁获取skill_view_tab_three -------self.item_list")
+	
     if self.item_list ~= nil then
         for k, v in pairs(self.item_list) do
             v:Release()
@@ -224,9 +226,13 @@ function SkillViewTabThree:socket_back_update()
         if temp_data.id == 10009 then
         elseif temp_data.id == 10008 then
         elseif temp_data.id == 10007 then
-            temp_life_skills1[1] = temp_data
+            BaseUtils.dump(temp_data,"蓝莓汁获取tab_three1-----------------------temp_data")
+			temp_life_skills1[1] = temp_data
         else
+			BaseUtils.dump(temp_data,"蓝莓汁获取tab_three2-----------------------temp_data")
+			if temp_data.id <10010 then 
             table.insert(temp_life_skills2, temp_data)
+			end
         end
     end
 
@@ -239,7 +245,11 @@ function SkillViewTabThree:socket_back_update()
         local item = self.item_list[i]
         if item == nil then
             item = SkillLifeItem.New(self, self.Item, i)
-            table.insert(self.item_list, item)
+			
+			if data.id<10019 then 
+			table.insert(self.item_list, item)
+			end
+            
         end
         item:set_item_data(data)
 

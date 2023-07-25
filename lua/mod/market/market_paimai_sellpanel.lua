@@ -141,8 +141,8 @@ function MarketPaiMaiSellPanel:OnOpen()
 
     self:UpdateSellPanel()
 
-    NoticeManager.Instance:FloatTipsByString(TI18N("发送协议send12400001"))
-    --MarketManager.Instance:send12407()
+   -- NoticeManager.Instance:FloatTipsByString(TI18N("发送协议send16700"))
+    --MarketManager.Instance:send16700()
 
 end
 
@@ -249,5 +249,5 @@ function MarketPaiMaiSellPanel:OnReloadMarketPaiMaiBuy()
     -- model.goldChosenBaseId = nil
     -- model.selectPos = nil
     -- model.lastSelectObj = nil
-    self:UpdateBuyPanel()
+    self:UpdateSellPanel()
 end

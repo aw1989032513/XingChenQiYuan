@@ -39,6 +39,9 @@ function MarketSellSelectPanel:InitPanel()
     local t = self.gameObject.transform
     local mainObj = t:Find("Main")
     local panelObj = t:Find("Panel")
+
+
+
     local allItemDic = BackpackManager.Instance.itemDic
     self.itemDic = {}         -- pos 为key
     local c = 1
@@ -308,6 +311,11 @@ function MarketSellSelectPanel:InitPanel()
     end)
 
     self.OnOpenEvent:Fire()
+
+
+    self.rectTransform            = self.gameObject:GetComponent(RectTransform)
+    self.rectTransform.offsetMin  = Vector2(0, 0)
+    self.rectTransform.offsetMax  = Vector2(0, 0)
 end
 
 function MarketSellSelectPanel:OnOpen()

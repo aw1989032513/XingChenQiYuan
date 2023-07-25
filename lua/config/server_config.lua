@@ -25,7 +25,8 @@ end
 -- {name = "开发服", host = "192.168.1.101", port = 8001, platform = "dev", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "1", isnew = "0", hot = "1", roles = {}} ,
 ServerConfig.servers = {
      {name = "1区:王者归来", host = "101.35.239.249", port = 8100, platform = "local", zone_id = 100, begin_time = 1611896400, end_time = 0, first_zone = "0", recomed = "0", isnew = "1", hot = "1", roles = {}},
-    
+     {name = "new测试服", host = "101.35.239.249", port = 8500, platform = "local", zone_id = 500, begin_time = 1611896400, end_time = 0, first_zone = "0", recomed = "0", isnew = "1", hot = "1", roles = {}}, 
+     --103.36.167.168"
     --{name = "开发服", host = "192.168.1.101", port = 8001, platform = "dev", zone_id = 1, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "1", isnew = "0", hot = "1", roles = {}} ,
     --{name = "本机11", host = "127.0.0.1", port = 8011, platform = "local", zone_id = 11, begin_time = 1351527200, end_time = 1651613600, first_zone = "1", recomed = "0", isnew = "0", hot = "0", roles = {}},
     --{name = "新测试服", host = "103.36.167.168", port = 8500, platform = "local", zone_id = 500, begin_time = 1674109712, end_time = 0, first_zone = "0", recomed = "0", isnew = "0", hot = "1", roles = {}},

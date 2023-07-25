@@ -104,6 +104,8 @@ function SkillManager:InitHandler()
     self:AddNetHandler(10833, self.On10833)
     self:AddNetHandler(10834, self.On10834)
     self:AddNetHandler(10835, self.On10835)
+	self:AddNetHandler(10887, self.On10887)
+	self:AddNetHandler(10888, self.On10888)
 end
 
 function SkillManager:Send10800()
@@ -188,6 +190,7 @@ function SkillManager:Send10809(_id)
     Connection.Instance:send(10809, { id = _id})
 end
 
+
 --使用生活技能
 function SkillManager:Send10810(_id)
     if Skill_life_Sound[_id] ~= nil then
@@ -257,6 +260,7 @@ end
 function SkillManager:Send10815(_id)
     Connection.Instance:send(10815, {id = _id})
 end
+
 
 --生活技能升级10次
 function SkillManager:On10815(data)
@@ -410,6 +414,15 @@ function SkillManager:Send10834()
     Connection.Instance:send(10834, {})
 end
 
+--
+function SkillManager:Send10887(_id)
+    Connection.Instance:send(10887, {id = _id})
+end
+
+function SkillManager:Send10888(_id)
+    Connection.Instance:send(10888, {id = _id})
+end
+
 function SkillManager:On10834(data)
     -- BaseUtils.dump(data)
     self.sq_double = data.sq_double
@@ -433,6 +446,22 @@ function SkillManager:On10835(data)
     data.showClose = 1
     data.cancelCallback = sure
     NoticeManager.Instance:ConfirmTips(data)
+end
+
+
+function SkillManager:On10887(data)
+    if data.flag == 0 then 
+    else
+    end
+    NoticeManager.Instance:FloatTipsByString(data.msg)
+end
+
+
+function SkillManager:On10888(data)
+    if data.flag == 0 then
+    else 
+    end
+    NoticeManager.Instance:FloatTipsByString(data.msg)
 end
 
 -------------------------------------------

@@ -314,7 +314,8 @@ event_name.market_paimai_gongshi_update = "market_paimai_gongshi_update"
 event_name.market_paimai_sell_update = "market_paimai_sell_update"
 -- 拍卖行已经购买数据更新
 event_name.market_paimai_purchased_update = "market_paimai_purchased_update"
-
+--拍卖行上架协议
+event_name.market_paimai_shangjiaCallBack = "market_paimai_shangjiaCallBack"
 -- 月度礼包
 event_name.monthly_gift_change = "monthly_gift_change"
 -- 宠物学习技能书

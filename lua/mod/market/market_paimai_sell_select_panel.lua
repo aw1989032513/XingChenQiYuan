@@ -247,6 +247,7 @@ function MarketPaiMaiSellSelectPanel:InitPanel()
             NoticeManager.Instance:FloatTipsByString(TI18N("请选择上架物品"))
             return
         end
+
         -- 价格 
         local maxPrice = self.maxValue
         -- 发送上架
@@ -255,7 +256,7 @@ function MarketPaiMaiSellSelectPanel:InitPanel()
                 local id = self.posToBackpackId[k]
                 if id ~= nil then
                     local base_id = self.itemDic[k].base_id
-
+                    local itemSlotId =self.itemDic[k].id
                     local itemName = self.itemDic[k].name
                     local confirmData = NoticeConfirmData.New()
                     confirmData.type = ConfirmData.Style.Normal
@@ -270,12 +271,12 @@ function MarketPaiMaiSellSelectPanel:InitPanel()
                     confirmData.cancelLabel = TI18N("取消")
                     confirmData.sureCallback = function()
                         if count > 0 then
-                            self.parent:CloseSell()
+                           -- self.parent:CloseSell()
                         else
                             NoticeManager.Instance:FloatTipsByString(TI18N("请选择上架物品"))
                         end
                         -- 发送上架协议
-                        MarketManager.Instance:send16705(base_id, itemNum, maxPrice) --请求上架物品                
+                        MarketManager.Instance:send16705(itemSlotId, itemNum, maxPrice) --请求上架物品                
                     end
                     NoticeManager.Instance:ConfirmTips(confirmData)
                 end
@@ -333,6 +334,14 @@ function MarketPaiMaiSellSelectPanel:InitPanel()
     self.OnOpenEvent:Fire()
 end
 
+function MarketPaiMaiSellSelectPanel:ShangJiaCallBack(result)
+    if result == 1 then
+        self.parent:CloseSell()
+        NoticeManager.Instance:FloatTipsByString(TI18N("上架成功"))
+    else
+        NoticeManager.Instance:FloatTipsByString(TI18N("上架失败"))
+    end
+end
 function MarketPaiMaiSellSelectPanel:OnOpen()
     local model = self.model
     self.loadItemCount = 0
@@ -375,15 +384,32 @@ function MarketPaiMaiSellSelectPanel:OnOpen()
     self:InitDataPanel(currentPage)
     self:InitDataPanel(currentPage + 1)
     self:UpdateInfoPanel()
+
+    -- 注册协议
+    self:RemoveListeners()
+    EventMgr.Instance:AddListener(event_name.market_paimai_shangjiaCallBack, 
+    function(result)
+    self:ShangJiaCallBack(result)
+    end)
+    
+
 end
 
 function MarketPaiMaiSellSelectPanel:OnHide()
+    self:RemoveListeners()
     self.posToOrder = nil
     self.posToNumber = nil
     self.backpackIdToPos = nil
     self.sellBackpackIdList = nil
     self.posToBackpackId = nil
     self.maxValue = 0
+end
+
+function MarketPaiMaiSellSelectPanel:RemoveListeners()
+    EventMgr.Instance:RemoveListener(event_name.market_paimai_shangjiaCallBack, 
+    function(result)
+    self:ShangJiaCallBack(result)
+    end)
 end
 
 function MarketPaiMaiSellSelectPanel:__delete()
@@ -472,6 +498,8 @@ function MarketPaiMaiSellSelectPanel:SelectItem(item)
             MarketManager.Instance:send12408(base_id, 2) --查询银币市场物品价格
         end
     end
+
+    self.priceText.text = "1"
     -- 确定当前选中的item的选中顺序
     if model.lastSelectPos == nil then -- 首次选中
         -- model.posToPercent[theId] = self.lastPrecent or 100

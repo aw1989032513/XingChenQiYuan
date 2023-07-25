@@ -401,6 +401,9 @@ end
 
 
 function SkillModel:On10808(data)
+
+BaseUtils.dump(data,"蓝莓汁获取On10808的data")
+
     self.life_skills = {}
     for i=1,#data.skills do
         local s = data.skills[i]
@@ -525,6 +528,7 @@ function SkillModel:On10822(data)
 end
 
 function SkillModel:On10823(data)
+BaseUtils.dump(data,"蓝莓汁获取On10823的data")
     for i=1,#data.skill_data do
         local s = data.skill_data[i]
         local key = string.format("%s_%s", s.id, s.lev)

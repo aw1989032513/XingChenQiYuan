@@ -33,7 +33,7 @@ function MarketManager:__init()
     -- 上架协议
     self:AddNetHandler(16705, self.on16705)
     --拍卖购买
-    self:AddNetHandler(12400000, self.on12400000)
+    self:AddNetHandler(16700, self.on16700)
     --拍卖出售
     self:AddNetHandler(12400001, self.on12400001)
     --拍卖公示
@@ -286,7 +286,7 @@ function MarketManager:send16704(itemdata)
     print("发送16704")
     local data = itemdata
     BaseUtils.dump(data)
-    Connection.Instance:send(16705, data)
+    Connection.Instance:send(16704, data)
 end
 function MarketManager:on16704(base_id,itemNum,maxPrice)
     print("收到协议")
@@ -295,56 +295,77 @@ end
 
 
 
+--拍卖场的购买按钮协议
+-- function MarketManager:send16700(catalg_1, catalg_2)
+--     print("发送12400")
+--     local data = {["catalg_1"] = catalg_1, ["catalg_2"] = catalg_2}
+--     BaseUtils.dump(data)
+--     Connection.Instance:send(12400000, data)
+-- end
+
+-- function MarketManager:on16700(data)
+--     local marketWin = self.model.marketWin
+--     local i = 1
+--     local paimaiBuyItemList = {}
+--     for _,v in pairs(data.goods) do
+--         table.insert(paimaiBuyItemList, v)
+--         i = i + 1
+--     end
+--     table.sort(paimaiBuyItemList, function (a, b)
+--         if DataMarketTbank.data_market_tbank_item[a.base_id].sort == DataMarketTbank.data_market_tbank_item[b.base_id].sort then
+--             return a.id < b.id
+--         else
+--             return DataMarketTbank.data_market_tbank_item[a.base_id].sort > DataMarketTbank.data_market_tbank_item[b.base_id].sort
+--         end
+--     end)
+
+--     if self.model.paimaiBuyItemList[data.catalg_1] == nil then
+--         self.model.paimaiBuyItemList[data.catalg_1] = {}
+--     end
+--     self.model.paimaiBuyItemList[data.catalg_1][data.catalg_2] = paimaiBuyItemList
+--     if marketWin ~= nil then
+--         local paimai_buy_panel = marketWin.subPanel[4].subPanelList[1]  -- 这里是拍卖主界面
+--         if paimai_buy_panel ~= nil then
+--             paimai_buy_panel:UpdateBuyPanel()  -- paimaiBuypanel
+--         end
+--     end
+
+--     EventMgr.Instance:Fire(event_name.market_paimai_buy_update, data.catalg_1, data.catalg_2)
+-- end
+
+-- 拍卖行 售卖界面
+function MarketManager:send16700(emptyTable)
+    print("发送16700")
+    local data = emptyTable
+    BaseUtils.dump(data)
+    Connection.Instance:send(16700, data)
+end
+
+function MarketManager:on16700(data)
+    print("收到16700")
+end
+
 -- 拍卖行上架物品协议
 function MarketManager:send16705(base_id,itemNum,maxPrice)
-    print("发送12400")
-    local data = {["base_id"] = base_id, ["itemNum"] = itemNum, ["maxPrice"] = maxPrice}
+    print("发送16705")
+    local data = {["idx"] = base_id, ["num"] = itemNum, ["price"] = maxPrice}
     BaseUtils.dump(data)
     Connection.Instance:send(16705, data)
 end
-function MarketManager:on16705(base_id,itemNum,maxPrice)
-    print("收到协议")
+function MarketManager:on16705(data)
+    print("收到16705协议")
+    EventMgr.Instance:Fire(event_name.market_paimai_shangjiaCallBack, data.result)
+
+    --如果这里成功的话，让sellpanel 更新面板
+    if  data.result == 1 then
+         -- 发送协议
+         self:send12400001()
+    end
 end
 
---拍卖场的购买按钮协议
-function MarketManager:send12400000(catalg_1, catalg_2)
-    print("发送12400")
-    local data = {["catalg_1"] = catalg_1, ["catalg_2"] = catalg_2}
-    BaseUtils.dump(data)
-    Connection.Instance:send(12400000, data)
-end
 
-function MarketManager:on12400000(data)
-    local marketWin = self.model.marketWin
-    local i = 1
-    local paimaiBuyItemList = {}
-    for _,v in pairs(data.goods) do
-        table.insert(paimaiBuyItemList, v)
-        i = i + 1
-    end
-    table.sort(paimaiBuyItemList, function (a, b)
-        if DataMarketTbank.data_market_tbank_item[a.base_id].sort == DataMarketTbank.data_market_tbank_item[b.base_id].sort then
-            return a.id < b.id
-        else
-            return DataMarketTbank.data_market_tbank_item[a.base_id].sort > DataMarketTbank.data_market_tbank_item[b.base_id].sort
-        end
-    end)
-
-    if self.model.paimaiBuyItemList[data.catalg_1] == nil then
-        self.model.paimaiBuyItemList[data.catalg_1] = {}
-    end
-    self.model.paimaiBuyItemList[data.catalg_1][data.catalg_2] = paimaiBuyItemList
-    if marketWin ~= nil then
-        local paimai_buy_panel = marketWin.subPanel[4].subPanelList[1]  -- 这里是拍卖主界面
-        if paimai_buy_panel ~= nil then
-            paimai_buy_panel:UpdateBuyPanel()  -- paimaiBuypanel
-        end
-    end
-
-    EventMgr.Instance:Fire(event_name.market_paimai_buy_update, data.catalg_1, data.catalg_2)
-end
 --拍卖场的出售按钮协议
-function MarketManager:send12400001(catalg_1, catalg_2)
+function MarketManager:send12400001()
     local data = { }
     BaseUtils.dump(data)
     Connection.Instance:send(12400001, data)

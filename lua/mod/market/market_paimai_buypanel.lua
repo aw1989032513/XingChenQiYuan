@@ -304,8 +304,8 @@ function MarketPaiMaiBuyPanel:OnBuy(num)
                     confirmData.cancelLabel = TI18N("取消")
                     confirmData.sureCallback = function()
                         -- 发送竞价协议                     
-                        --MarketManager.Instance:send12401(chosenId, model.goldBuyNum)
-                        NoticeManager.Instance:FloatTipsByString(TI18N("发送了竞价协议"..tempID.."价格："..price))            
+                        MarketManager.Instance:send12401(chosenId, model.goldBuyNum) -- 16700
+                       -- NoticeManager.Instance:FloatTipsByString(TI18N("发送了竞价协议"..tempID.."价格："..price))            
                     end
                     NoticeManager.Instance:ConfirmTips(confirmData)
    end
@@ -438,8 +438,10 @@ function MarketPaiMaiBuyPanel:ReloadBuyPanel()
         model.currentPaiMaiSub = catalg_2
     end
     -- 这里请求当前Btn_subbtn 的协议给服务器
-     --MarketManager.Instance:send12400000(catid, catalg_2)
-     NoticeManager.Instance:FloatTipsByString(TI18N("拍卖Buy——12400000请求"))
+     -- MarketManager.Instance:send16700(catid, catalg_2)
+     local emptyTable = {}
+     MarketManager.Instance:send16700(emptyTable)
+     NoticeManager.Instance:FloatTipsByString(TI18N("拍卖Buy——16700请求"))
 end
 
 -- 发送协议send12400000 会调用这个方法
